@@ -37,7 +37,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
-        "https://pave-sentinel-ai.vercel.app/",
+        "https://pave-sentinel-ai.vercel.app",
     ],
 
     allow_credentials=True,
