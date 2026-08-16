@@ -1,0 +1,6069 @@
+/* =========================================================
+   SMART PAVE SCAN
+   GLOBAL UI / UX THEME
+   ========================================================= */
+
+:root {
+  --sp-blue: #00d9ff;
+  --sp-cyan: #19e6ff;
+  --sp-dark: #061525;
+  --sp-dark-2: #0b2035;
+  --sp-panel: rgba(7, 25, 43, 0.72);
+  --sp-panel-light: rgba(255, 255, 255, 0.10);
+  --sp-border: rgba(92, 224, 255, 0.35);
+  --sp-text: #f4fbff;
+  --sp-muted: #a8bfd1;
+  --sp-green: #36e39a;
+  --sp-orange: #ffad42;
+  --sp-red: #ff4d67;
+}
+
+/* =========================================================
+   GLOBAL PAGE BACKGROUND
+   ========================================================= */
+
+.smart-pave-page {
+  min-height: 100vh;
+  color: var(--sp-text);
+
+  background:
+    linear-gradient(
+      rgba(3, 14, 27, 0.62),
+      rgba(3, 14, 27, 0.72)
+    ),
+    url("./assets/backgrounds/smart-pave-bg.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.smart-pave-content {
+  min-height: 100vh;
+  background: transparent;
+}
+
+/* =========================================================
+   GLASS PANEL
+   ========================================================= */
+
+.smart-glass {
+  background: rgba(9, 29, 48, 0.68);
+
+  border: 1px solid rgba(100, 224, 255, 0.28);
+
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-radius: 20px;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.smart-sidebar {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3, 18, 34, 0.96),
+      rgba(4, 15, 28, 0.92)
+    );
+
+  border-right: 1px solid rgba(55, 216, 255, 0.18);
+
+  box-shadow:
+    8px 0 30px rgba(0, 0, 0, 0.25);
+}
+
+.smart-logo {
+  color: var(--sp-cyan);
+
+  text-shadow:
+    0 0 10px rgba(0, 217, 255, 0.5),
+    0 0 25px rgba(0, 217, 255, 0.25);
+
+  font-weight: 800;
+}
+
+/* =========================================================
+   SIDEBAR MENU
+   ========================================================= */
+
+.smart-menu-item {
+  position: relative;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    color 0.25s ease;
+
+  border-radius: 12px;
+}
+
+.smart-menu-item:hover {
+  transform: translateX(5px);
+
+  color: white;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 217, 255, 0.18),
+      rgba(0, 217, 255, 0.04)
+    );
+
+  box-shadow:
+    0 0 20px rgba(0, 217, 255, 0.12);
+}
+
+.smart-menu-item.active {
+  color: white;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 217, 255, 0.28),
+      rgba(0, 217, 255, 0.07)
+    );
+
+  box-shadow:
+    inset 3px 0 0 var(--sp-cyan),
+    0 0 25px rgba(0, 217, 255, 0.10);
+}
+
+/* =========================================================
+   ICON ANIMATION
+   ========================================================= */
+
+.smart-icon {
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
+}
+
+.smart-menu-item:hover .smart-icon {
+  transform: scale(1.12) rotate(-3deg);
+
+  filter:
+    drop-shadow(0 0 8px rgba(0, 217, 255, 0.8));
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.smart-header {
+  background: rgba(7, 22, 38, 0.78);
+
+  border-bottom:
+    1px solid rgba(95, 218, 255, 0.20);
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+/* =========================================================
+   DASHBOARD TITLE
+   ========================================================= */
+
+.smart-title {
+  color: rgb(212, 27, 27);
+
+  text-shadow:
+    0 0 20px rgba(0, 217, 255, 0.20);
+}
+/* =========================================================
+   WELCOME / DASHBOARD INTRO CARD
+   ========================================================= */
+
+.smart-welcome-card {
+  position: relative;
+
+  width: 100%;
+
+  margin-bottom: 28px;
+
+  padding: 28px 32px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(8, 34, 56, 0.88),
+      rgba(6, 25, 43, 0.78)
+    );
+
+  border:
+    1px solid rgba(92, 224, 255, 0.32);
+
+  border-radius: 22px;
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* =========================================================
+   FUTURISTIC CYAN GLOW
+   ========================================================= */
+
+.smart-welcome-card::before {
+  content: "";
+
+  position: absolute;
+
+  width: 260px;
+  height: 260px;
+
+  left: -80px;
+  top: -120px;
+
+  background:
+    rgba(0, 217, 255, 0.12);
+
+  filter: blur(70px);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   SECOND GLOW
+   ========================================================= */
+
+.smart-welcome-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  right: -80px;
+  bottom: -120px;
+
+  background:
+    rgba(25, 230, 255, 0.08);
+
+  filter: blur(70px);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   WELCOME CONTENT
+   ========================================================= */
+
+.smart-welcome-content {
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   WELCOME TEXT
+   ========================================================= */
+
+.smart-dashboard-welcome {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 2.5rem;
+
+  font-weight: 800;
+
+  line-height: 1.2;
+
+  letter-spacing: -0.02em;
+
+  text-shadow:
+    0 0 10px rgba(0, 217, 255, 0.35),
+    0 0 25px rgba(0, 217, 255, 0.18);
+}
+
+
+/* =========================================================
+   DASHBOARD TITLE
+   ========================================================= */
+
+.smart-dashboard-title {
+  margin-top: 10px;
+  margin-bottom: 0;
+
+  color: #67e8f9;
+
+  font-size: 1.65rem;
+
+  font-weight: 700;
+
+  line-height: 1.3;
+
+  text-shadow:
+    0 0 10px rgba(0, 217, 255, 0.25);
+}
+
+
+/* =========================================================
+   DASHBOARD DESCRIPTION
+   ========================================================= */
+
+.smart-dashboard-subtitle {
+  margin-top: 8px;
+
+  color: #d7e7f2;
+
+  font-size: 1.05rem;
+
+  line-height: 1.6;
+
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   WELCOME CARD HOVER
+   ========================================================= */
+
+.smart-welcome-card:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(0, 217, 255, 0.55);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.38),
+    0 0 25px rgba(0, 217, 255, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10);
+}
+/* =========================================================
+   STAT CARDS
+   ========================================================= */
+
+.smart-stat-card {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16, 50, 78, 0.82),
+      rgba(5, 24, 43, 0.72)
+    );
+
+  border:
+    1px solid rgba(90, 220, 255, 0.25);
+
+  border-radius: 20px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.28);
+
+  transition:
+    transform 0.30s ease,
+    box-shadow 0.30s ease,
+    border-color 0.30s ease;
+}
+.smart-stat-card:hover {
+  border-color: rgba(0, 217, 255, 0.55);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.38),
+    0 0 25px rgba(0, 217, 255, 0.12);
+}
+.smart-stat-card:active {
+  transform: scale(0.97);
+}
+
+.smart-stat-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: -100%;
+  left: -50%;
+
+  width: 200%;
+  height: 80%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.12),
+      transparent
+    );
+
+  transform: rotate(15deg);
+
+  transition: top 0.7s ease;
+}
+
+.smart-stat-card:hover::before {
+  top: 120%;
+}
+
+.smart-stat-card:hover {
+  transform: translateY(-8px) scale(1.015);
+
+  border-color:
+    rgba(0, 217, 255, 0.55);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.38),
+    0 0 25px rgba(0, 217, 255, 0.12);
+}
+
+/* =========================================================
+   STAT ICON
+   ========================================================= */
+
+.smart-stat-icon {
+  position: relative;
+  z-index: 2;
+
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease;
+}
+
+.smart-stat-card:hover .smart-stat-icon {
+  transform: scale(1.15) rotate(5deg);
+
+  filter:
+    drop-shadow(0 0 10px rgba(0, 217, 255, 0.7));
+}
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+.smart-button {
+  position: relative;
+  overflow: hidden;
+
+  border: none;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      90deg,
+      #075dff,
+      #00cfff
+    );
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 8px 22px rgba(0, 130, 255, 0.28);
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.smart-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 28px rgba(0, 200, 255, 0.35);
+}
+
+.smart-button:active {
+  transform: scale(0.96);
+}
+
+/* =========================================================
+   CLICK RIPPLE
+   ========================================================= */
+
+.smart-button::after {
+  content: "";
+
+  position: absolute;
+
+  width: 10px;
+  height: 10px;
+
+  left: 50%;
+  top: 50%;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.55);
+
+  transform:
+    translate(-50%, -50%)
+    scale(0);
+
+  opacity: 0;
+}
+
+.smart-button:active::after {
+  animation: smartRipple 0.55s ease-out;
+}
+
+@keyframes smartRipple {
+  0% {
+    transform:
+      translate(-50%, -50%)
+      scale(0);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform:
+      translate(-50%, -50%)
+      scale(25);
+    opacity: 0;
+  }
+}
+
+/* =========================================================
+   NOTIFICATION BELL
+   ========================================================= */
+
+.smart-notification {
+  position: relative;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease;
+}
+
+.smart-notification:hover {
+  transform: scale(1.10);
+}
+
+.smart-notification:active {
+  transform: scale(0.88);
+}
+
+.smart-notification:hover .bell-icon {
+  animation: bellShake 0.55s ease;
+}
+
+@keyframes bellShake {
+
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+
+  20% {
+    transform: rotate(-14deg);
+  }
+
+  40% {
+    transform: rotate(14deg);
+  }
+
+  60% {
+    transform: rotate(-10deg);
+  }
+
+  80% {
+    transform: rotate(8deg);
+  }
+}
+
+/* =========================================================
+   NOTIFICATION COUNT
+   ========================================================= */
+
+.smart-notification-count {
+  position: absolute;
+
+  top: -7px;
+  right: -7px;
+
+  min-width: 21px;
+  height: 21px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #ff3154;
+
+  color: white;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  border: 2px solid #071827;
+
+  box-shadow:
+    0 0 12px rgba(255, 49, 84, 0.7);
+
+  animation: notificationPulse 1.8s infinite;
+}
+
+@keyframes notificationPulse {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(255, 49, 84, 0.45);
+  }
+
+  70% {
+    box-shadow:
+      0 0 0 8px rgba(255, 49, 84, 0);
+  }
+
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(255, 49, 84, 0);
+  }
+}
+
+/* =========================================================
+   REPORT CARD
+   ========================================================= */
+
+.smart-report-card {
+  background:
+    rgba(8, 28, 47, 0.76);
+
+  border:
+    1px solid rgba(94, 221, 255, 0.25);
+
+  border-radius: 20px;
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.28);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.smart-report-card:hover {
+  transform: translateY(-5px);
+
+  border-color:
+    rgba(0, 217, 255, 0.50);
+}
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.smart-input {
+  background:
+    rgba(255, 255, 255, 0.07);
+
+  color: white;
+
+  border:
+    1px solid rgba(110, 220, 255, 0.28);
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.smart-input:focus {
+  outline: none;
+
+  background:
+    rgba(255, 255, 255, 0.10);
+
+  border-color:
+    var(--sp-cyan);
+
+  box-shadow:
+    0 0 0 3px rgba(0, 217, 255, 0.10),
+    0 0 18px rgba(0, 217, 255, 0.15);
+}
+
+/* =========================================================
+   STATUS BADGES
+   ========================================================= */
+
+.smart-status {
+  border-radius: 999px;
+
+  padding: 6px 12px;
+
+  font-weight: 700;
+
+  backdrop-filter: blur(8px);
+}
+
+.smart-status.verified {
+  color: #55f2b0;
+
+  background:
+    rgba(54, 227, 154, 0.12);
+
+  border:
+    1px solid rgba(54, 227, 154, 0.35);
+}
+
+.smart-status.progress {
+  color: #ffd166;
+
+  background:
+    rgba(255, 173, 66, 0.12);
+
+  border:
+    1px solid rgba(255, 173, 66, 0.35);
+}
+
+.smart-status.completed {
+  color: #c18cff;
+
+  background:
+    rgba(160, 80, 255, 0.12);
+
+  border:
+    1px solid rgba(160, 80, 255, 0.35);
+}
+
+/* =========================================================
+   PAGE FADE-IN
+   ========================================================= */
+
+.smart-page-enter {
+  animation:
+    smartPageEnter 0.55s ease both;
+}
+
+@keyframes smartPageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+/* =========================================
+   OFFICIAL ANALYTICS
+   ========================================= */
+
+.smart-analytics-section {
+  min-height: 100vh;
+  background: transparent;
+  color: white;
+}
+/* =========================================================
+   NOTIFICATION PANEL
+   ========================================================= */
+
+.smart-notification-card {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22, 58, 87, 0.88),
+      rgba(7, 31, 52, 0.82)
+    );
+
+  border: 1px solid rgba(92, 224, 255, 0.24);
+
+  border-radius: 18px;
+
+  padding: 20px 24px;
+
+  color: var(--sp-text);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+
+/* =========================================================
+   NOTIFICATION HOVER
+   ========================================================= */
+
+.smart-notification-card:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(0, 217, 255, 0.55);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(24, 69, 101, 0.92),
+      rgba(7, 34, 57, 0.88)
+    );
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.30),
+    0 0 20px rgba(0, 217, 255, 0.10);
+}
+
+
+/* =========================================================
+   NOTIFICATION TITLE
+   ========================================================= */
+
+.smart-notification-title {
+  color: #ffffff;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+
+  margin-bottom: 6px;
+
+  text-shadow:
+    0 0 8px rgba(0, 217, 255, 0.12);
+}
+
+
+/* =========================================================
+   NOTIFICATION MESSAGE
+   ========================================================= */
+
+.smart-notification-message {
+  color: #cbd5e1;
+
+  font-size: 1rem;
+
+  line-height: 1.6;
+
+  margin-top: 4px;
+}
+
+
+/* =========================================================
+   NEW BADGE
+   ========================================================= */
+
+.smart-notification-new {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 4px 10px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #075dff,
+      #00cfff
+    );
+
+  color: white;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  box-shadow:
+    0 0 12px rgba(0, 217, 255, 0.35);
+}
+
+
+/* =========================================================
+   MARK AS READ BUTTON
+   ========================================================= */
+
+.smart-notification-read {
+  margin-top: 12px;
+
+  padding: 6px 12px;
+
+  border-radius: 8px;
+
+  border: 1px solid rgba(0, 217, 255, 0.25);
+
+  background: rgba(0, 217, 255, 0.08);
+
+  color: #67e8f9;
+
+  font-size: 0.875rem;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* MARK AS READ HOVER */
+
+.smart-notification-read:hover {
+  transform: translateY(-2px);
+
+  background:
+    rgba(0, 217, 255, 0.16);
+
+  border-color:
+    rgba(0, 217, 255, 0.55);
+
+  box-shadow:
+    0 0 15px rgba(0, 217, 255, 0.12);
+}
+
+
+/* =========================================================
+   UNREAD NOTIFICATION
+   ========================================================= */
+
+.smart-notification-card.unread {
+  border-left:
+    3px solid var(--sp-cyan);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.22),
+    0 0 18px rgba(0, 217, 255, 0.08);
+}
+
+
+/* =========================================================
+   LOADING / EMPTY MESSAGE
+   ========================================================= */
+
+.smart-notification-status {
+  color: #94a3b8;
+
+  font-size: 0.95rem;
+}
+/* =========================================================
+   REPORT NEW POTHOLE FORM
+   ========================================================= */
+
+.smart-report-form-card {
+  position: relative;
+
+  width: 100%;
+
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+  padding: 0;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(8, 34, 56, 0.90),
+      rgba(5, 23, 40, 0.86)
+    );
+
+  border:
+    1px solid rgba(92, 224, 255, 0.32);
+
+  border-radius: 24px;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  overflow: hidden;
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* =========================================================
+   CYAN GLOW INSIDE FORM CARD
+   ========================================================= */
+
+.smart-report-form-card::before {
+  content: "";
+
+  position: absolute;
+
+  width: 300px;
+  height: 300px;
+
+  left: -100px;
+  top: -120px;
+
+  background:
+    rgba(0, 217, 255, 0.10);
+
+  filter: blur(80px);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   SECOND GLOW
+   ========================================================= */
+
+.smart-report-form-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 260px;
+  height: 260px;
+
+  right: -100px;
+  bottom: -120px;
+
+  background:
+    rgba(0, 140, 255, 0.08);
+
+  filter: blur(80px);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   FORM CONTENT
+   ========================================================= */
+
+.smart-report-form-content {
+  position: relative;
+
+  z-index: 2;
+
+  padding: 32px;
+}
+
+
+/* =========================================================
+   FORM TITLE
+   ========================================================= */
+
+.smart-report-form-title {
+  margin: 0 0 28px 0;
+
+  color: #ffffff;
+
+  font-size: 1.8rem;
+
+  font-weight: 800;
+
+  letter-spacing: -0.02em;
+
+  text-shadow:
+    0 0 10px rgba(0, 217, 255, 0.30),
+    0 0 25px rgba(0, 217, 255, 0.12);
+}
+
+
+/* =========================================================
+   FORM GROUP
+   ========================================================= */
+
+.smart-form-group {
+  margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   FORM LABEL
+   ========================================================= */
+
+.smart-form-label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #dff8ff;
+
+  font-size: 0.95rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.01em;
+}
+
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+
+.smart-form-input {
+  width: 100%;
+
+  min-height: 52px;
+
+  padding: 13px 16px;
+
+  color: #ffffff;
+
+  background:
+    rgba(255, 255, 255, 0.07);
+
+  border:
+    1px solid rgba(110, 220, 255, 0.28);
+
+  border-radius: 12px;
+
+  outline: none;
+
+  font-size: 1rem;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+}
+
+
+/* =========================================================
+   INPUT PLACEHOLDER
+   ========================================================= */
+
+.smart-form-input::placeholder {
+  color: #9bb5c7;
+
+  opacity: 1;
+}
+
+
+/* =========================================================
+   INPUT FOCUS
+   ========================================================= */
+
+.smart-form-input:focus {
+  background:
+    rgba(255, 255, 255, 0.10);
+
+  border-color:
+    var(--sp-cyan);
+
+  box-shadow:
+    0 0 0 3px rgba(0, 217, 255, 0.10),
+    0 0 20px rgba(0, 217, 255, 0.14);
+}
+
+
+/* =========================================================
+   TEXTAREA
+   ========================================================= */
+
+.smart-form-textarea {
+  width: 100%;
+
+  padding: 14px 16px;
+
+  min-height: 120px;
+
+  resize: vertical;
+
+  color: #ffffff;
+
+  background:
+    rgba(255, 255, 255, 0.07);
+
+  border:
+    1px solid rgba(110, 220, 255, 0.28);
+
+  border-radius: 12px;
+
+  outline: none;
+
+  font-size: 1rem;
+
+  line-height: 1.6;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* =========================================================
+   TEXTAREA PLACEHOLDER
+   ========================================================= */
+
+.smart-form-textarea::placeholder {
+  color: #9bb5c7;
+
+  opacity: 1;
+}
+
+
+/* =========================================================
+   TEXTAREA FOCUS
+   ========================================================= */
+
+.smart-form-textarea:focus {
+  background:
+    rgba(255, 255, 255, 0.10);
+
+  border-color:
+    var(--sp-cyan);
+
+  box-shadow:
+    0 0 0 3px rgba(0, 217, 255, 0.10),
+    0 0 20px rgba(0, 217, 255, 0.14);
+}
+
+
+/* =========================================================
+   FILE UPLOAD
+   ========================================================= */
+
+.smart-file-upload {
+  margin-bottom: 24px;
+}
+
+
+/* =========================================================
+   FILE INPUT
+   ========================================================= */
+
+.smart-file-input {
+  width: 100%;
+
+  padding: 12px;
+
+  color: #dff8ff;
+
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  border:
+    1px dashed rgba(92, 224, 255, 0.40);
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+.smart-file-input:hover {
+  background:
+    rgba(0, 217, 255, 0.08);
+
+  border-color:
+    rgba(0, 217, 255, 0.65);
+}
+
+
+/* =========================================================
+   FILE BUTTON
+   ========================================================= */
+
+.smart-file-input::file-selector-button {
+  margin-right: 12px;
+
+  padding: 9px 16px;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #075dff,
+      #00cfff
+    );
+
+  border: none;
+
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   FORM HELP TEXT
+   ========================================================= */
+
+.smart-form-help {
+  margin-top: 7px;
+
+  color: #8faabd;
+
+  font-size: 0.82rem;
+}
+
+
+/* =========================================================
+   IMAGE PREVIEW
+   ========================================================= */
+
+.smart-image-preview {
+  margin-bottom: 24px;
+
+  padding: 16px;
+
+  background:
+    rgba(0, 0, 0, 0.18);
+
+  border:
+    1px solid rgba(92, 224, 255, 0.20);
+
+  border-radius: 14px;
+}
+
+
+.smart-image-preview img {
+  display: block;
+
+  width: 100%;
+
+  max-width: 500px;
+
+  margin-top: 10px;
+
+  border-radius: 12px;
+
+  border:
+    1px solid rgba(92, 224, 255, 0.25);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.30);
+}
+
+
+/* =========================================================
+   LOCATION BUTTON
+   ========================================================= */
+
+.smart-location-button {
+  position: relative;
+
+  margin-bottom: 24px;
+
+  padding: 12px 20px;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #00a86b,
+      #00c878
+    );
+
+  border: none;
+
+  border-radius: 11px;
+
+  cursor: pointer;
+
+  font-size: 0.95rem;
+
+  font-weight: 700;
+
+  box-shadow:
+    0 8px 22px rgba(0, 200, 120, 0.20);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.smart-location-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 28px rgba(0, 220, 140, 0.30);
+}
+
+
+.smart-location-button:active {
+  transform: scale(0.97);
+}
+
+
+
+
+
+/* =========================================================
+   SUBMIT BUTTON
+   ========================================================= */
+
+.smart-submit-wrapper {
+  display: flex;
+
+  justify-content: flex-end;
+
+  margin-top: 10px;
+}
+
+
+.smart-submit-button {
+  min-width: 180px;
+
+  padding: 13px 24px;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   FORM CARD HOVER
+   ========================================================= */
+
+.smart-report-form-card:hover {
+  border-color:
+    rgba(0, 217, 255, 0.45);
+
+  box-shadow:
+    0 20px 55px rgba(0, 0, 0, 0.38),
+    0 0 25px rgba(0, 217, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================================================
+   MOBILE FORM
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .smart-report-form-content {
+    padding: 22px 18px;
+  }
+
+  .smart-report-form-title {
+    font-size: 1.5rem;
+  }
+
+  .smart-coordinate-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .smart-submit-wrapper {
+    justify-content: stretch;
+  }
+
+  .smart-submit-button {
+    width: 100%;
+  }
+
+}
+/* =========================================================
+   GPS LOCATION CARD
+   ========================================================= */
+
+.smart-location-card {
+  position: relative;
+
+  margin-top: 8px;
+  margin-bottom: 28px;
+
+  padding: 22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(13, 48, 73, 0.82),
+      rgba(6, 29, 48, 0.76)
+    );
+
+  border:
+    1px solid rgba(92, 224, 255, 0.30);
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+/* =========================================================
+   LOCATION CARD HOVER
+   ========================================================= */
+
+.smart-location-card:hover {
+
+  border-color:
+    rgba(0, 217, 255, 0.50);
+
+  box-shadow:
+    0 15px 38px rgba(0, 0, 0, 0.30),
+    0 0 22px rgba(0, 217, 255, 0.08);
+}
+
+
+/* =========================================================
+   LOCATION CARD HEADER
+   ========================================================= */
+
+.smart-location-card-header {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 20px;
+
+  padding-bottom: 16px;
+
+  border-bottom:
+    1px solid rgba(92, 224, 255, 0.16);
+}
+
+
+/* =========================================================
+   LOCATION ICON
+   ========================================================= */
+
+.smart-location-icon {
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0, 217, 255, 0.18),
+      rgba(0, 140, 255, 0.10)
+    );
+
+  border:
+    1px solid rgba(0, 217, 255, 0.30);
+
+  font-size: 21px;
+
+  box-shadow:
+    0 0 16px rgba(0, 217, 255, 0.10);
+}
+
+
+/* =========================================================
+   LOCATION CARD TITLE
+   ========================================================= */
+
+.smart-location-card-title {
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 1.08rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.01em;
+}
+
+
+/* =========================================================
+   LOCATION CARD SUBTITLE
+   ========================================================= */
+
+.smart-location-card-subtitle {
+
+  margin: 4px 0 0;
+
+  color: #9fb8c9;
+
+  font-size: 0.84rem;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   COORDINATE GRID
+   ========================================================= */
+
+.smart-coordinate-grid {
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 16px;
+}
+
+
+/* =========================================================
+   INDIVIDUAL COORDINATE BOX
+   ========================================================= */
+
+.smart-coordinate-box {
+
+  position: relative;
+
+  padding: 16px;
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  border:
+    1px solid rgba(110, 220, 255, 0.20);
+
+  border-radius: 14px;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.smart-coordinate-box:hover {
+
+  background:
+    rgba(0, 217, 255, 0.065);
+
+  border-color:
+    rgba(0, 217, 255, 0.42);
+
+  box-shadow:
+    0 0 18px rgba(0, 217, 255, 0.07);
+}
+
+
+/* =========================================================
+   COORDINATE LABEL
+   ========================================================= */
+
+.smart-coordinate-label {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 10px;
+
+  color: #e8faff;
+
+  font-size: 0.9rem;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   COORDINATE SYMBOL
+   ========================================================= */
+
+.smart-coordinate-symbol {
+
+  width: 25px;
+  height: 25px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 7px;
+
+  color: #67e8f9;
+
+  background:
+    rgba(0, 217, 255, 0.10);
+
+  border:
+    1px solid rgba(0, 217, 255, 0.20);
+
+  font-size: 14px;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   COORDINATE INPUT
+   ========================================================= */
+
+.smart-coordinate-input {
+
+  width: 100%;
+
+  min-height: 48px;
+
+  padding: 11px 13px;
+
+  box-sizing: border-box;
+
+  color: #ffffff;
+
+  background:
+    rgba(3, 19, 33, 0.72);
+
+  border:
+    1px solid rgba(110, 220, 255, 0.24);
+
+  border-radius: 10px;
+
+  outline: none;
+
+  font-size: 0.95rem;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+
+/* =========================================================
+   COORDINATE PLACEHOLDER
+   ========================================================= */
+
+.smart-coordinate-input::placeholder {
+
+  color: #7895a8;
+
+  opacity: 1;
+}
+
+
+/* =========================================================
+   COORDINATE INPUT FOCUS
+   ========================================================= */
+
+.smart-coordinate-input:focus {
+
+  background:
+    rgba(5, 30, 48, 0.90);
+
+  border-color:
+    var(--sp-cyan);
+
+  box-shadow:
+    0 0 0 3px rgba(0, 217, 255, 0.09),
+    0 0 18px rgba(0, 217, 255, 0.12);
+}
+
+
+/* =========================================================
+   COORDINATE HELP TEXT
+   ========================================================= */
+
+.smart-coordinate-help {
+
+  display: block;
+
+  margin-top: 7px;
+
+  color: #7895a8;
+
+  font-size: 0.74rem;
+
+  line-height: 1.3;
+}
+
+
+/* =========================================================
+   LOCATION INFORMATION
+   ========================================================= */
+
+.smart-location-info {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-top: 16px;
+
+  padding: 11px 13px;
+
+  color: #9fb8c9;
+
+  background:
+    rgba(0, 217, 255, 0.045);
+
+  border:
+    1px solid rgba(0, 217, 255, 0.12);
+
+  border-radius: 10px;
+
+  font-size: 0.78rem;
+
+  line-height: 1.5;
+}
+
+
+.smart-location-info strong {
+
+  color: #67e8f9;
+
+  font-weight: 700;
+}
+
+
+.smart-location-info-icon {
+
+  flex-shrink: 0;
+
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   MOBILE GPS CARD
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .smart-location-card {
+
+    padding: 17px;
+
+  }
+
+  .smart-coordinate-grid {
+
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+
+  }
+
+  .smart-location-card-header {
+
+    align-items: flex-start;
+
+  }
+
+  .smart-location-info {
+
+    align-items: flex-start;
+
+  }
+
+}
+/* =========================================================
+   ROAD REPORT ANALYTICS TITLE
+   ========================================================= */
+
+.smart-analytics-title {
+  color: #ffffff !important;
+
+  font-size: 1.8rem;
+  font-weight: 800;
+
+  margin: 0 0 28px 0;
+
+  letter-spacing: -0.02em;
+
+  text-shadow:
+    0 0 10px rgba(0, 217, 255, 0.45),
+    0 0 25px rgba(0, 217, 255, 0.20);
+}
+/* =========================================================
+   ROAD REPORT ANALYTICS
+   ========================================================= */
+
+.smart-analytics-section {
+  min-height: 100vh;
+
+  padding: 32px 40px 50px;
+
+  background: transparent;
+
+  color: white;
+}
+
+
+/* =========================================================
+   ANALYTICS TITLE
+   ========================================================= */
+
+.smart-analytics-title {
+  margin: 0 0 28px 0;
+
+  color: #ffffff !important;
+
+  font-size: 1.8rem;
+
+  font-weight: 800;
+
+  line-height: 1.3;
+
+  letter-spacing: -0.02em;
+
+  text-shadow:
+    0 0 10px rgba(0, 217, 255, 0.45),
+    0 0 25px rgba(0, 217, 255, 0.20);
+}
+
+
+/* =========================================================
+   ANALYTICS CHART GRID
+   ========================================================= */
+
+.smart-analytics-chart-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 24px;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   ANALYTICS CHART CARD
+   ========================================================= */
+
+.smart-analytics-chart-card {
+  min-height: 220px;
+
+  padding: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(8, 34, 56, 0.90),
+      rgba(5, 23, 40, 0.86)
+    );
+
+  border:
+    1px solid rgba(92, 224, 255, 0.30);
+
+  border-radius: 20px;
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  color: #ffffff;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.smart-analytics-chart-card:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(0, 217, 255, 0.55);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.35),
+    0 0 25px rgba(0, 217, 255, 0.10);
+}
+
+
+/* =========================================================
+   CHART LOADING TEXT
+   ========================================================= */
+
+.smart-chart-loading {
+  min-height: 170px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #dff8ff;
+
+  font-size: 1rem;
+
+  font-weight: 600;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .smart-analytics-section {
+    padding: 24px 18px 40px;
+  }
+
+  .smart-analytics-title {
+    font-size: 1.5rem;
+  }
+
+  .smart-analytics-chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+/* =========================================================
+   NOTIFICATION SYSTEM
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   NOTIFICATION WRAPPER
+   --------------------------------------------------------- */
+
+.smart-notification-wrapper {
+    position: relative;
+    z-index: 100000;
+}
+
+
+/* ---------------------------------------------------------
+   BELL BUTTON
+   --------------------------------------------------------- */
+
+.smart-notification {
+    position: relative;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    background: transparent;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    z-index: 100001;
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.smart-notification:hover {
+    transform: scale(1.08);
+}
+
+
+/* Bell icon */
+
+.smart-notification .bell-icon {
+    color: #ffffff;
+}
+
+
+/* ---------------------------------------------------------
+   NOTIFICATION COUNT
+   --------------------------------------------------------- */
+
+.smart-notification-count {
+
+    position: absolute;
+
+    top: -2px;
+    right: -2px;
+
+    min-width: 22px;
+    height: 22px;
+
+    padding: 0 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 999px;
+
+    background: #ff3158;
+    color: #ffffff;
+
+    border: 2px solid #071b2d;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    line-height: 1;
+
+    z-index: 100002;
+}
+
+
+/* ---------------------------------------------------------
+   BACKGROUND OVERLAY
+   --------------------------------------------------------- */
+
+.smart-notification-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    z-index: 99998;
+
+    cursor: default;
+}
+
+
+/* ---------------------------------------------------------
+   NOTIFICATION PANEL
+   --------------------------------------------------------- */
+
+.smart-notification-panel {
+
+    position: fixed;
+
+    top: 76px;
+    right: 28px;
+
+    width: 390px;
+    max-width: calc(100vw - 32px);
+
+    background: #071d30 !important;
+
+    border: 1px solid rgba(72, 191, 255, 0.45);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.65),
+        0 0 30px rgba(0, 170, 255, 0.12);
+
+    overflow: hidden;
+
+    opacity: 1 !important;
+
+    z-index: 99999;
+
+    isolation: isolate;
+
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+
+/* ---------------------------------------------------------
+   PANEL HEADER
+   --------------------------------------------------------- */
+
+.smart-notification-header {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 18px 20px;
+
+    background: #09263d;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+
+.smart-notification-header h3 {
+
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+.smart-notification-header p {
+
+    margin: 5px 0 0;
+
+    color: #9db3c7;
+
+    font-size: 13px;
+}
+
+
+/* ---------------------------------------------------------
+   CLOSE BUTTON
+   --------------------------------------------------------- */
+
+.smart-notification-close {
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.smart-notification-close:hover {
+
+    background: rgba(255, 255, 255, 0.16);
+
+    transform: rotate(90deg);
+
+}
+
+
+/* ---------------------------------------------------------
+   NOTIFICATION LIST
+   --------------------------------------------------------- */
+
+.smart-notification-list {
+
+    max-height: 420px;
+
+    overflow-y: auto;
+
+    background: #071d30;
+}
+
+
+/* Scrollbar */
+
+.smart-notification-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+
+.smart-notification-list::-webkit-scrollbar-track {
+    background: #061725;
+}
+
+
+.smart-notification-list::-webkit-scrollbar-thumb {
+
+    background: #28526d;
+
+    border-radius: 10px;
+}
+
+
+.smart-notification-list::-webkit-scrollbar-thumb:hover {
+    background: #3b7798;
+}
+
+
+/* ---------------------------------------------------------
+   NOTIFICATION ITEM
+   --------------------------------------------------------- */
+
+.smart-notification-item {
+
+    width: 100%;
+
+    display: block;
+
+    text-align: left;
+
+    padding: 17px 20px;
+
+    border: none;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    background: #071d30;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.smart-notification-item:hover {
+
+    background: #0d2c45;
+
+}
+
+
+/* Unread notification */
+
+.smart-notification-item.unread {
+
+    background: #0b2c46;
+
+    border-left: 4px solid #38bdf8;
+
+}
+
+
+.smart-notification-item.unread:hover {
+
+    background: #103650;
+
+}
+
+
+/* ---------------------------------------------------------
+   MESSAGE
+   --------------------------------------------------------- */
+
+.smart-notification-message {
+
+    margin: 0;
+
+    color: #f4f8fb;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    font-weight: 500;
+}
+
+
+/* ---------------------------------------------------------
+   META
+   --------------------------------------------------------- */
+
+.smart-notification-meta {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+
+/* ---------------------------------------------------------
+   TYPE BADGES
+   --------------------------------------------------------- */
+
+.smart-notification-type {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 4px 9px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-transform: capitalize;
+}
+
+
+.smart-notification-type.success {
+
+    background: rgba(34, 197, 94, 0.18);
+
+    color: #4ade80;
+}
+
+
+.smart-notification-type.warning {
+
+    background: rgba(234, 179, 8, 0.18);
+
+    color: #facc15;
+}
+
+
+.smart-notification-type.error {
+
+    background: rgba(239, 68, 68, 0.18);
+
+    color: #f87171;
+}
+
+
+.smart-notification-type.info {
+
+    background: rgba(56, 189, 248, 0.18);
+
+    color: #38bdf8;
+}
+
+
+/* ---------------------------------------------------------
+   DATE
+   --------------------------------------------------------- */
+
+.smart-notification-date {
+
+    color: #7892a6;
+
+    font-size: 10px;
+
+    white-space: nowrap;
+}
+
+
+/* ---------------------------------------------------------
+   NO NOTIFICATIONS
+   --------------------------------------------------------- */
+
+.smart-no-notifications {
+
+    min-height: 220px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    color: #6f899c;
+
+    background: #071d30;
+}
+
+
+.smart-no-notifications svg {
+
+    color: #4b7089;
+
+}
+
+
+.smart-no-notifications p {
+
+    margin: 0;
+
+    font-size: 14px;
+
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 640px) {
+
+    .smart-notification-panel {
+
+        top: 70px;
+
+        right: 12px;
+
+        width: calc(100vw - 24px);
+
+        max-width: none;
+
+    }
+
+    .smart-notification-meta {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+    }
+
+}
+/* =========================================================
+   NOTIFICATION DROPDOWN - FIXED STACKING
+========================================================= */
+
+.smart-notification {
+    position: relative;
+    z-index: 100001;
+}
+
+
+.smart-notification + div {
+    z-index: 999999 !important;
+}
+
+
+/* Header containing notification */
+
+.smart-dashboard-header {
+    position: relative;
+    z-index: 100000 !important;
+    overflow: visible !important;
+}
+
+
+/* Notification wrapper */
+
+.notification-wrapper {
+    position: relative;
+    z-index: 999999 !important;
+    overflow: visible !important;
+}
+
+
+/* Notification panel */
+
+.notification-panel {
+    position: absolute;
+    z-index: 999999 !important;
+    background: rgba(4, 25, 43, 0.98) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+/* =========================================================
+   MY REPORTS - DARK THEME TEXT FIX
+   ========================================================= */
+
+.smart-reports-title {
+    color: #f8fafc !important;
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.smart-reports-subtitle {
+    color: #94a3b8 !important;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+
+/* Individual report title */
+
+.smart-report-title {
+    color: #e2e8f0 !important;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+
+/* Report address */
+
+.smart-report-address {
+    color: #a9bfd3 !important;
+    font-size: 1.1rem;
+    margin-top: 0.4rem;
+}
+
+
+/* Original image heading */
+
+.smart-photo-title {
+    color: #dbeafe !important;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+
+/* General text inside report cards */
+
+.smart-report-card {
+    color: #e2e8f0;
+}
+
+
+/* Labels */
+
+.smart-report-card label,
+.smart-report-card .label {
+    color: #cbd5e1 !important;
+}
+
+
+/* Secondary information */
+
+.smart-report-card small,
+.smart-report-card .secondary-text {
+    color: #94a3b8 !important;
+}
+
+
+/* Description / report information */
+
+.smart-report-description {
+    color: #cbd5e1 !important;
+    line-height: 1.6;
+}
+
+
+/* Location / GPS information */
+
+.smart-report-location {
+    color: #a9bfd3 !important;
+}
+
+
+/* Date and time */
+
+.smart-report-date {
+    color: #94a3b8 !important;
+}
+
+
+/* AI analysis text */
+
+.smart-report-ai {
+    color: #67e8f9 !important;
+}
+/* =========================================================
+   MY REPORTS HEADER
+   ========================================================= */
+
+.smart-reports-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.smart-reports-title {
+    color: #f8fafc !important;
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.smart-reports-subtitle {
+    color: #94a3b8 !important;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+.smart-refresh-button {
+    background: #2563eb;
+    color: #ffffff !important;
+    border: 1px solid #3b82f6;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.smart-refresh-button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+/* =========================================================
+   SMART PAVE - MY REPORTS DARK THEME
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.smart-reports-page {
+    color: #e2e8f0;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.smart-reports-title {
+    color: #f8fafc !important;
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.smart-reports-subtitle {
+    color: #94a3b8 !important;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+
+/* =========================================================
+   REPORT CARD
+   ========================================================= */
+
+.smart-report-card {
+    color: #e2e8f0;
+}
+
+
+/* =========================================================
+   REPORT TITLE
+   ========================================================= */
+
+.smart-report-title {
+    color: #f1f5f9 !important;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   ADDRESS
+   ========================================================= */
+
+.smart-report-address {
+    color: #a8bfd2 !important;
+    font-size: 1.05rem;
+    margin-top: 0.4rem;
+}
+
+
+/* =========================================================
+   ORIGINAL PHOTO TITLE
+   ========================================================= */
+
+.smart-photo-title {
+    color: #dbeafe !important;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+
+/* =========================================================
+   REPORT DETAILS
+   ========================================================= */
+
+.smart-report-detail {
+    min-width: 0;
+}
+
+
+/* DETAIL LABEL
+   Example:
+   Description
+   Severity
+   Location
+*/
+
+.smart-detail-label {
+    color: #94a3b8 !important;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+
+/* DETAIL VALUE
+   Example:
+   Large
+   High
+   12.827...
+*/
+
+.smart-detail-value {
+    color: #e2e8f0 !important;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-top: 0.25rem;
+}
+
+
+/* Severity */
+
+.smart-severity-value {
+    color: #fbbf24 !important;
+}
+
+
+/* GPS location */
+
+.smart-location-value {
+    color: #cbd5e1 !important;
+}
+
+
+/* =========================================================
+   REPAIRED SECTION
+   ========================================================= */
+
+.smart-repaired-section {
+    border-top: 1px solid rgba(148, 163, 184, 0.45);
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+
+/* Road Repaired */
+
+.smart-repaired-title {
+    color: #22c55e !important;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+
+/* Green check icon */
+
+.smart-repaired-icon {
+    font-size: 1.4rem;
+}
+
+
+/* Repaired Road Photo */
+
+.smart-repaired-photo-title {
+    color: #dbeafe !important;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+
+/* Repair description */
+
+.smart-repaired-description {
+    color: #a8bfd2 !important;
+    font-size: 0.95rem;
+    margin-top: 0.75rem;
+}
+
+
+/* Repair uploaded date */
+
+.smart-repaired-date {
+    color: #8299ad !important;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+
+/* =========================================================
+   STATUS BADGES
+   ========================================================= */
+
+.smart-status-pending {
+    background: #422006 !important;
+    color: #fbbf24 !important;
+    border: 1px solid #92400e;
+}
+
+.smart-status-verified {
+    background: #052e16 !important;
+    color: #4ade80 !important;
+    border: 1px solid #166534;
+}
+
+.smart-status-progress {
+    background: #172554 !important;
+    color: #60a5fa !important;
+    border: 1px solid #1d4ed8;
+}
+
+.smart-status-completed {
+    background: #2e1065 !important;
+    color: #c084fc !important;
+    border: 1px solid #7e22ce;
+}
+
+.smart-status-default {
+    background: #1e293b !important;
+    color: #cbd5e1 !important;
+    border: 1px solid #475569;
+}
+
+
+/* =========================================================
+   NO IMAGE
+   ========================================================= */
+
+.smart-no-image {
+    background: rgba(15, 23, 42, 0.75);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    color: #94a3b8 !important;
+    border-radius: 12px;
+    padding: 2.5rem;
+    text-align: center;
+}
+
+
+/* =========================================================
+   EMPTY REPORTS
+   ========================================================= */
+
+.smart-empty-reports {
+    padding: 2.5rem;
+    text-align: center;
+}
+
+.smart-empty-title {
+    color: #f1f5f9 !important;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.smart-empty-description {
+    color: #94a3b8 !important;
+    margin-top: 0.5rem;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.smart-loading-container {
+    padding: 2.5rem;
+    text-align: center;
+}
+
+.smart-loading-text {
+    color: #cbd5e1 !important;
+    font-size: 1.15rem;
+}
+/* =========================================================
+   LIVE POTHOLE MAP CARD
+   ========================================================= */
+
+.smart-map-card {
+    width: 100%;
+    margin-top: 24px;
+    padding: 20px;
+
+    background: rgba(8, 35, 55, 0.92);
+
+    border: 1px solid rgba(73, 210, 255, 0.35);
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.35),
+        inset 0 0 30px rgba(0, 190, 255, 0.04);
+
+    backdrop-filter: blur(14px);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.smart-map-card-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 18px;
+
+    padding: 4px 4px 8px;
+}
+
+
+.smart-map-title {
+
+    margin: 0;
+
+    font-size: 28px;
+
+    font-weight: 800;
+
+    color: #ffffff;
+
+    letter-spacing: -0.5px;
+}
+
+
+.smart-map-subtitle {
+
+    margin: 6px 0 0;
+
+    font-size: 14px;
+
+    color: #b9d0df;
+}
+
+
+/* =========================================================
+   REPORT COUNT
+   ========================================================= */
+
+.smart-map-count {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 10px 16px;
+
+    border-radius: 14px;
+
+    background: rgba(0, 190, 255, 0.10);
+
+    border: 1px solid rgba(73, 210, 255, 0.25);
+
+    white-space: nowrap;
+}
+
+
+.smart-map-count-number {
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    color: #5ee7ff;
+}
+
+
+.smart-map-count-label {
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #c8d9e5;
+}
+
+
+/* =========================================================
+   MAP CONTAINER
+   ========================================================= */
+
+.smart-map-container {
+
+    width: 100%;
+
+    height: 500px;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(73, 210, 255, 0.30);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =========================================================
+   LEAFLET MAP
+   ========================================================= */
+
+.smart-map-container .leaflet-container {
+
+    width: 100%;
+
+    height: 100%;
+
+    border-radius: 18px;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   POPUP
+   ========================================================= */
+
+.smart-map-container .leaflet-popup-content-wrapper {
+
+    background: #082337;
+
+    color: #ffffff;
+
+    border-radius: 14px;
+
+    border: 1px solid rgba(73, 210, 255, 0.35);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+
+.smart-map-container .leaflet-popup-tip {
+
+    background: #082337;
+}
+
+
+.smart-map-container .leaflet-popup-content {
+
+    margin: 16px;
+
+    min-width: 230px;
+}
+
+
+/* =========================================================
+   POPUP CONTENT
+   ========================================================= */
+
+.smart-map-popup {
+
+    font-family: inherit;
+}
+
+
+.smart-map-popup-title {
+
+    margin: 0 0 12px;
+
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    color: #ffffff;
+}
+
+
+.smart-map-popup-row {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+
+    margin-top: 9px;
+
+    font-size: 13px;
+
+    line-height: 1.4;
+}
+
+
+.smart-map-popup-row strong {
+
+    color: #5ee7ff;
+
+    font-size: 12px;
+}
+
+
+.smart-map-popup-row span {
+
+    color: #d4e2eb;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.smart-map-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-top: 14px;
+
+    padding: 12px 14px;
+
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+.smart-map-footer-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 13px;
+
+    color: #a9c1d0;
+}
+
+
+.smart-map-footer-icon {
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .smart-map-card {
+
+        padding: 14px;
+
+        border-radius: 18px;
+
+    }
+
+
+    .smart-map-card-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+    }
+
+
+    .smart-map-title {
+
+        font-size: 22px;
+
+    }
+
+
+    .smart-map-container {
+
+        height: 400px;
+
+    }
+
+
+    .smart-map-footer {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .smart-map-container {
+
+        height: 350px;
+
+    }
+
+
+    .smart-map-title {
+
+        font-size: 20px;
+
+    }
+
+
+    .smart-map-subtitle {
+
+        font-size: 12px;
+
+    }
+
+}
+/* =========================================================
+   SMART PAVE SCAN - OFFICIAL REPORTS
+   DARK CYBER / GLASS THEME
+   ========================================================= */
+
+
+/* =========================================
+   MAIN PAGE
+   ========================================= */
+
+.official-reports-page {
+    min-height: 100vh;
+    padding: 32px;
+    color: #eaf7ff;
+}
+
+
+/* =========================================
+   PAGE HEADER
+   ========================================= */
+
+.reports-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+
+.reports-title-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.reports-title-icon {
+    font-size: 32px;
+}
+
+
+.reports-page-header h1 {
+    margin: 0;
+    color: #ffffff !important;
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+
+.reports-page-header p {
+    margin-top: 8px;
+    margin-bottom: 0;
+    color: #a9c8dc !important;
+    font-size: 16px;
+}
+
+
+/* =========================================
+   REFRESH BUTTON
+   ========================================= */
+
+.reports-refresh-btn {
+    border: none;
+    outline: none;
+    padding: 13px 24px;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #06b6d4,
+        #0284c7
+    );
+
+    color: #ffffff !important;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px rgba(6, 182, 212, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.reports-refresh-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 30px rgba(6, 182, 212, 0.35);
+}
+
+
+/* =========================================
+   REPORT LIST
+   ========================================= */
+
+.official-reports-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+
+/* =========================================
+   REPORT CARD
+   ========================================= */
+
+.official-report-card {
+    width: 100%;
+
+    padding: 28px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(8, 38, 61, 0.96),
+            rgba(5, 25, 42, 0.94)
+        );
+
+    border:
+        1px solid rgba(34, 211, 238, 0.55);
+
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+    color: #eaf7ff !important;
+}
+
+
+/* =========================================
+   REPORT HEADER
+   ========================================= */
+
+.report-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+
+.report-number {
+    margin: 0;
+
+    color: #ffffff !important;
+
+    font-size: 24px;
+    font-weight: 800;
+}
+
+
+.citizen-name {
+    margin-top: 8px;
+
+    color: #c7e3f3 !important;
+
+    font-size: 17px;
+    font-weight: 600;
+}
+
+
+.citizen-email {
+    margin-top: 3px;
+
+    color: #82a9bf !important;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   STATUS
+   ========================================= */
+
+.report-status {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 9px 18px;
+
+    border-radius: 999px;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+
+/* Pending */
+
+.status-pending {
+    color: #fde68a !important;
+
+    background:
+        rgba(245, 158, 11, 0.13);
+
+    border:
+        1px solid rgba(245, 158, 11, 0.45);
+}
+
+
+/* Verified */
+
+.status-verified {
+    color: #5eead4 !important;
+
+    background:
+        rgba(16, 185, 129, 0.13);
+
+    border:
+        1px solid rgba(16, 185, 129, 0.45);
+}
+
+
+/* In Progress */
+
+.status-in-progress {
+    color: #7dd3fc !important;
+
+    background:
+        rgba(14, 165, 233, 0.13);
+
+    border:
+        1px solid rgba(14, 165, 233, 0.45);
+}
+
+
+/* Completed */
+
+.status-completed {
+    color: #86efac !important;
+
+    background:
+        rgba(34, 197, 94, 0.13);
+
+    border:
+        1px solid rgba(34, 197, 94, 0.45);
+}
+
+
+/* =========================================
+   REPORT CONTENT
+   ========================================= */
+
+.report-content-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.1fr)
+        minmax(300px, 1fr);
+
+    gap: 30px;
+
+    margin-top: 28px;
+}
+
+
+/* =========================================
+   ROAD IMAGE
+   ========================================= */
+
+.report-road-image {
+    width: 100%;
+    height: 320px;
+
+    object-fit: cover;
+
+    border-radius: 17px;
+
+    border:
+        1px solid rgba(56, 189, 248, 0.25);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.30);
+}
+
+
+.no-report-image {
+    height: 320px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(8, 30, 50, 0.7);
+
+    border:
+        1px dashed rgba(56, 189, 248, 0.4);
+
+    color: #7fa7bd !important;
+
+    font-size: 40px;
+}
+
+
+.no-report-image span {
+    color: #9db9c9 !important;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   REPORT DETAILS
+   ========================================= */
+
+.report-details {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+
+    padding: 8px 4px;
+}
+
+
+.report-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.detail-label {
+    color: #67e8f9 !important;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
+}
+
+
+.detail-value {
+    color: #d6edf8 !important;
+
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   SEVERITY
+   ========================================= */
+
+.severity-badge {
+    width: fit-content;
+
+    padding: 5px 12px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+
+.severity-low {
+    color: #86efac !important;
+
+    background:
+        rgba(34, 197, 94, 0.12);
+}
+
+
+.severity-medium {
+    color: #fcd34d !important;
+
+    background:
+        rgba(245, 158, 11, 0.12);
+}
+
+
+.severity-high {
+    color: #fca5a5 !important;
+
+    background:
+        rgba(239, 68, 68, 0.13);
+}
+
+
+.severity-unknown {
+    color: #a5b4fc !important;
+
+    background:
+        rgba(99, 102, 241, 0.12);
+}
+
+
+/* =========================================
+   ACTION SECTION
+   ========================================= */
+
+.report-action-section {
+    margin-top: 28px;
+
+    padding-top: 25px;
+
+    border-top:
+        1px solid rgba(103, 232, 249, 0.18);
+}
+
+
+.action-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 18px;
+
+    color: #ffffff !important;
+
+    font-size: 19px;
+    font-weight: 800;
+}
+
+
+.action-title span {
+    font-size: 20px;
+}
+
+
+/* =========================================
+   ACTION GRID
+   ========================================= */
+
+.action-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(180px, 0.5fr)
+        minmax(250px, 1fr);
+
+    gap: 16px;
+}
+
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-bottom: 15px;
+}
+
+
+.form-group label {
+    color: #9ec5d9 !important;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   INPUTS / SELECT
+   ========================================= */
+
+.report-input {
+    width: 100%;
+
+    min-height: 50px;
+
+    padding: 12px 15px;
+
+    border-radius: 11px;
+
+    border:
+        1px solid rgba(56, 189, 248, 0.28);
+
+    outline: none;
+
+    background:
+        rgba(5, 25, 42, 0.9);
+
+    color: #ffffff !important;
+
+    font-size: 15px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.report-input::placeholder {
+    color: #6f94a8 !important;
+}
+
+
+.report-input:focus {
+    border-color: #22d3ee;
+
+    box-shadow:
+        0 0 0 3px rgba(34, 211, 238, 0.10);
+}
+
+
+/* SELECT OPTION */
+
+.report-input option {
+    background: #082238;
+    color: #ffffff;
+}
+
+
+/* =========================================
+   ENGINEER ROW
+   ========================================= */
+
+.engineer-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+.engineer-input {
+    flex: 1;
+}
+
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.action-btn {
+    border: none;
+
+    border-radius: 11px;
+
+    padding: 12px 22px;
+
+    color: #ffffff !important;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.action-btn:hover {
+    transform: translateY(-1px);
+}
+
+
+/* Verify */
+
+.verify-btn {
+    margin-top: 8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #10b981,
+            #059669
+        );
+
+    box-shadow:
+        0 7px 20px rgba(16, 185, 129, 0.18);
+}
+
+
+/* Assign */
+
+.assign-btn {
+    background:
+        linear-gradient(
+            135deg,
+            #06b6d4,
+            #0284c7
+        );
+
+    box-shadow:
+        0 7px 20px rgba(6, 182, 212, 0.18);
+}
+
+
+/* Complete */
+
+.complete-btn {
+    background:
+        linear-gradient(
+            135deg,
+            #22c55e,
+            #15803d
+        );
+}
+
+
+/* Upload */
+
+.upload-btn {
+    margin-top: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8b5cf6,
+            #6d28d9
+        );
+}
+
+
+/* =========================================
+   ACTION DESCRIPTION
+   ========================================= */
+
+.action-description {
+    margin-bottom: 16px;
+
+    color: #9db9c9 !important;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   FILE INPUT
+   ========================================= */
+
+.file-input {
+    width: 100%;
+
+    padding: 12px;
+
+    border-radius: 11px;
+
+    border:
+        1px solid rgba(56, 189, 248, 0.28);
+
+    background:
+        rgba(5, 25, 42, 0.85);
+
+    color: #d7edf7 !important;
+
+    cursor: pointer;
+}
+
+
+.file-input::file-selector-button {
+    margin-right: 12px;
+
+    padding: 8px 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #0e7490;
+
+    color: #ffffff;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   REPAIR PHOTO
+   ========================================= */
+
+.repair-photo-section {
+    margin-top: 28px;
+
+    padding-top: 25px;
+
+    border-top:
+        1px solid rgba(103, 232, 249, 0.18);
+}
+
+
+.repair-road-image {
+    width: 100%;
+
+    max-width: 850px;
+
+    height: 350px;
+
+    object-fit: cover;
+
+    border-radius: 17px;
+
+    border:
+        1px solid rgba(34, 197, 94, 0.35);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+.upload-date {
+    margin-top: 10px;
+
+    color: #7fa5b8 !important;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   NO REPORTS
+   ========================================= */
+
+.no-reports-card {
+    padding: 60px 30px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    background:
+        rgba(8, 38, 61, 0.8);
+
+    border:
+        1px solid rgba(56, 189, 248, 0.35);
+}
+
+
+.no-reports-icon {
+    font-size: 45px;
+
+    margin-bottom: 15px;
+}
+
+
+.no-reports-card h2 {
+    color: #ffffff !important;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+
+.no-reports-card p {
+    margin-top: 8px;
+
+    color: #8eafc1 !important;
+}
+
+
+/* =========================================
+   LOADING
+   ========================================= */
+
+.reports-loading {
+    min-height: 70vh;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+.loading-spinner {
+    margin-bottom: 15px;
+
+    color: #22d3ee;
+
+    font-size: 45px;
+
+    animation: smart-pave-spin 1s linear infinite;
+}
+
+
+.reports-loading h2 {
+    color: #ffffff !important;
+
+    font-size: 22px;
+}
+
+
+.reports-loading p {
+    margin-top: 8px;
+
+    color: #8eafc1 !important;
+}
+
+
+@keyframes smart-pave-spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .official-reports-page {
+        padding: 20px;
+    }
+
+
+    .reports-page-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .report-content-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .action-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .engineer-row {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .assign-btn {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .official-reports-page {
+        padding: 14px;
+    }
+
+
+    .official-report-card {
+        padding: 18px;
+    }
+
+
+    .reports-page-header h1 {
+        font-size: 27px;
+    }
+
+
+    .report-header {
+        flex-direction: column;
+    }
+
+
+    .report-road-image {
+        height: 240px;
+    }
+
+
+    .no-report-image {
+        height: 240px;
+    }
+
+}
+/* =========================================================
+   SMART PAVE SCAN
+   CITIZEN SIDEBAR
+   ========================================================= */
+
+.citizen-sidebar {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: 280px;
+
+    padding: 22px 16px;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 1000;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(7, 25, 43, 0.98),
+            rgba(8, 19, 37, 0.98)
+        );
+
+    border-right:
+        1px solid rgba(56, 189, 248, 0.22);
+
+    box-shadow:
+        8px 0 35px rgba(0, 0, 0, 0.28);
+
+    backdrop-filter: blur(20px);
+
+    overflow-y: auto;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.citizen-logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 8px 10px 24px;
+
+    border-bottom:
+        1px solid rgba(56, 189, 248, 0.12);
+
+    margin-bottom: 18px;
+}
+
+
+.citizen-logo-icon {
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    font-size: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #06b6d4,
+            #0ea5e9
+        );
+
+    box-shadow:
+        0 0 22px rgba(6, 182, 212, 0.35);
+}
+
+
+.citizen-logo h1 {
+
+    margin: 0;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+
+    color: #ffffff;
+}
+
+
+.citizen-logo span {
+
+    display: block;
+
+    margin-top: 1px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    color: #22d3ee;
+}
+
+
+/* =========================================================
+   PROFILE CARD
+   ========================================================= */
+
+.citizen-profile-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 13px;
+
+    margin-bottom: 20px;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(14, 116, 144, 0.20),
+            rgba(15, 23, 42, 0.65)
+        );
+
+    border:
+        1px solid rgba(56, 189, 248, 0.18);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+
+.citizen-avatar {
+
+    width: 42px;
+    height: 42px;
+
+    min-width: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0891b2,
+            #2563eb
+        );
+
+    box-shadow:
+        0 5px 18px rgba(14, 165, 233, 0.25);
+}
+
+
+.citizen-profile-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.citizen-profile-info strong {
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.citizen-profile-info span {
+
+    margin-top: 2px;
+
+    color: #8ba8bb;
+
+    font-size: 11px;
+}
+
+
+.citizen-verified-icon {
+
+    color: #22c55e;
+}
+
+
+/* =========================================================
+   MENU TITLE
+   ========================================================= */
+
+.citizen-menu-title {
+
+    padding: 0 10px 9px;
+
+    color: #5f8297;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.8px;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.citizen-navigation {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+/* =========================================================
+   NAVIGATION CARD
+   ========================================================= */
+
+.citizen-nav-card {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-height: 54px;
+
+    padding: 7px 11px;
+
+    text-decoration: none;
+
+    border-radius: 15px;
+
+    color: #b7cbd8;
+
+    border:
+        1px solid transparent;
+
+    background:
+        rgba(10, 32, 52, 0.30);
+
+    transition:
+        all 0.25s ease;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   LEFT ACTIVE INDICATOR
+   ========================================================= */
+
+.citizen-nav-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    top: 12px;
+    bottom: 12px;
+
+    width: 3px;
+
+    border-radius: 0 5px 5px 0;
+
+    background: transparent;
+
+    transition: all 0.25s ease;
+}
+
+
+/* =========================================================
+   ICON BOX
+   ========================================================= */
+
+.citizen-nav-icon {
+
+    width: 40px;
+    height: 40px;
+
+    min-width: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    color: #8faebe;
+
+    background:
+        rgba(30, 64, 86, 0.55);
+
+    border:
+        1px solid rgba(148, 163, 184, 0.08);
+
+    transition: all 0.25s ease;
+}
+
+
+/* =========================================================
+   NAVIGATION TEXT
+   ========================================================= */
+
+.citizen-nav-text {
+
+    flex: 1;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.citizen-nav-arrow {
+
+    opacity: 0;
+
+    color: #22d3ee;
+
+    transform: translateX(-5px);
+
+    transition: all 0.25s ease;
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.citizen-nav-card:hover {
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8, 145, 178, 0.18),
+            rgba(14, 116, 144, 0.08)
+        );
+
+    border-color:
+        rgba(56, 189, 248, 0.18);
+
+    transform: translateX(4px);
+}
+
+
+.citizen-nav-card:hover .citizen-nav-icon {
+
+    color: #22d3ee;
+
+    background:
+        rgba(6, 182, 212, 0.15);
+
+    border-color:
+        rgba(34, 211, 238, 0.25);
+
+    transform: scale(1.04);
+}
+
+
+.citizen-nav-card:hover .citizen-nav-arrow {
+
+    opacity: 1;
+
+    transform: translateX(0);
+}
+
+
+/* =========================================================
+   ACTIVE NAVIGATION
+   ========================================================= */
+
+.citizen-nav-active {
+
+    color: #ffffff !important;
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(6, 182, 212, 0.32),
+            rgba(14, 165, 233, 0.13)
+        ) !important;
+
+    border:
+        1px solid rgba(34, 211, 238, 0.30) !important;
+
+    box-shadow:
+        0 8px 25px rgba(6, 182, 212, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+
+.citizen-nav-active::before {
+
+    background:
+        linear-gradient(
+            180deg,
+            #22d3ee,
+            #06b6d4
+        );
+
+    box-shadow:
+        0 0 12px rgba(34, 211, 238, 0.8);
+}
+
+
+.citizen-nav-active .citizen-nav-icon {
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0891b2,
+            #0284c7
+        );
+
+    border-color:
+        rgba(103, 232, 249, 0.35);
+
+    box-shadow:
+        0 0 15px rgba(6, 182, 212, 0.25);
+}
+
+
+.citizen-nav-active .citizen-nav-arrow {
+
+    opacity: 1;
+
+    transform: translateX(0);
+}
+
+
+/* =========================================================
+   QUICK REPORT CARD
+   ========================================================= */
+
+.citizen-report-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 22px;
+
+    padding: 13px;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(6, 182, 212, 0.18),
+            rgba(30, 64, 175, 0.12)
+        );
+
+    border:
+        1px solid rgba(34, 211, 238, 0.18);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.16);
+}
+
+
+.citizen-report-icon {
+
+    width: 38px;
+    height: 38px;
+
+    min-width: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background:
+        rgba(6, 182, 212, 0.15);
+
+    font-size: 18px;
+}
+
+
+.citizen-report-card div:nth-child(2) {
+
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+}
+
+
+.citizen-report-card strong {
+
+    color: #ffffff;
+
+    font-size: 11px;
+}
+
+
+.citizen-report-card span {
+
+    color: #8caabc;
+
+    font-size: 9px;
+
+    margin-top: 2px;
+}
+
+
+.citizen-report-card button {
+
+    width: 30px;
+    height: 30px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    color: #ffffff;
+
+    background:
+        #0891b2;
+
+    font-size: 17px;
+
+    transition: all 0.2s ease;
+}
+
+
+.citizen-report-card button:hover {
+
+    background: #06b6d4;
+
+    transform: translateX(2px);
+
+    box-shadow:
+        0 0 15px rgba(6, 182, 212, 0.4);
+}
+
+
+/* =========================================================
+   SIDEBAR BOTTOM
+   ========================================================= */
+
+.citizen-sidebar-bottom {
+
+    margin-top: auto;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid rgba(56, 189, 248, 0.10);
+}
+
+
+/* =========================================================
+   ONLINE STATUS
+   ========================================================= */
+
+.citizen-online-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 0 10px 12px;
+
+    color: #7293a7;
+
+    font-size: 10px;
+
+    font-weight: 600;
+}
+
+
+.online-dot {
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 10px rgba(34, 197, 94, 0.8);
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+.citizen-logout-card {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 9px 11px;
+
+    border-radius: 14px;
+
+    border:
+        1px solid transparent;
+
+    cursor: pointer;
+
+    color: #fb7185;
+
+    background:
+        rgba(127, 29, 29, 0.10);
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: all 0.25s ease;
+}
+
+
+.citizen-logout-icon {
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    color: #fb7185;
+
+    background:
+        rgba(239, 68, 68, 0.10);
+}
+
+
+.citizen-logout-card:hover {
+
+    color: #ffffff;
+
+    background:
+        rgba(239, 68, 68, 0.16);
+
+    border-color:
+        rgba(248, 113, 113, 0.25);
+
+    transform: translateX(4px);
+}
+
+
+.citizen-logout-card:hover .citizen-logout-icon {
+
+    background:
+        rgba(239, 68, 68, 0.20);
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.citizen-sidebar::-webkit-scrollbar {
+
+    width: 4px;
+}
+
+
+.citizen-sidebar::-webkit-scrollbar-track {
+
+    background: transparent;
+}
+
+
+.citizen-sidebar::-webkit-scrollbar-thumb {
+
+    background:
+        rgba(34, 211, 238, 0.20);
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .citizen-sidebar {
+
+        width: 230px;
+
+        padding: 16px 10px;
+    }
+
+
+    .citizen-logo h1 {
+
+        font-size: 17px;
+    }
+
+
+    .citizen-nav-text {
+
+        font-size: 12px;
+    }
+
+
+    .citizen-nav-icon {
+
+        width: 36px;
+        height: 36px;
+
+        min-width: 36px;
+    }
+
+
+    .citizen-report-card {
+
+        display: none;
+    }
+
+}
+/* =========================================================
+   CITIZEN MAIN LAYOUT
+   ========================================================= */
+
+.citizen-layout {
+
+    min-height: 100vh;
+
+    background:
+        #071a2c;
+}
+
+
+/* =========================================================
+   CITIZEN INNER CONTENT ALIGNMENT
+   ========================================================= */
+
+.citizen-main-content {
+    min-height: 100vh;
+
+    /* IMPORTANT:
+       .citizen-main already handles sidebar offset */
+    margin-left: 0 !important;
+
+    width: 100% !important;
+
+    padding: 0 !important;
+
+    position: relative;
+
+    background: transparent;
+}
+
+
+@media (max-width: 768px) {
+
+    .citizen-main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+}
+/* =====================================================
+   CITIZEN PORTAL LAYOUT
+===================================================== */
+
+.citizen-layout {
+    min-height: 100vh;
+    display: flex;
+
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(6, 182, 212, 0.12),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #061525,
+            #081b2c 55%,
+            #061321
+        );
+
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.citizen-sidebar {
+    width: 285px;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 22px 18px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #0b172b,
+            #0a1426
+        );
+
+    border-right:
+        1px solid rgba(56, 189, 248, 0.22);
+
+    box-shadow:
+        10px 0 35px rgba(0, 0, 0, 0.28);
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    z-index: 100;
+}
+
+
+/* =====================================================
+   BRAND
+===================================================== */
+
+.citizen-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 8px 10px 24px;
+
+    border-bottom:
+        1px solid rgba(148, 163, 184, 0.12);
+}
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #06b6d4,
+            #0ea5e9
+        );
+
+    font-size: 22px;
+
+    box-shadow:
+        0 8px 25px rgba(6, 182, 212, 0.25);
+}
+
+.citizen-brand h1 {
+    margin: 0;
+
+    font-size: 21px;
+    font-weight: 800;
+
+    color: #22d3ee;
+}
+
+.citizen-brand span {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 11px;
+
+    color: #7f9bb2;
+
+    letter-spacing: 0.8px;
+
+    text-transform: uppercase;
+}
+
+
+/* =====================================================
+   USER CARD
+===================================================== */
+
+.citizen-user-card {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 20px 4px;
+
+    padding: 13px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(14, 165, 233, 0.08);
+
+    border:
+        1px solid rgba(56, 189, 248, 0.16);
+}
+
+.citizen-avatar {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(34, 211, 238, 0.13);
+
+    font-size: 19px;
+}
+
+.citizen-user-card strong {
+    display: block;
+
+    color: #f8fafc;
+
+    font-size: 14px;
+}
+
+.citizen-user-card small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #7f9bb2;
+
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.citizen-navigation {
+    margin-top: 5px;
+}
+
+.nav-title {
+    margin: 0 10px 10px;
+
+    color: #607d94;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.4px;
+}
+
+.citizen-nav-item {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin: 6px 0;
+
+    padding: 13px 14px;
+
+    border-radius: 13px;
+
+    color: #c4d4df;
+
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.citizen-nav-item:hover {
+    color: #ffffff;
+
+    background:
+        rgba(56, 189, 248, 0.09);
+
+    transform:
+        translateX(3px);
+}
+
+
+/* ACTIVE MENU */
+
+.citizen-nav-item.active {
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0891b2,
+            #06b6d4
+        );
+
+    box-shadow:
+        0 8px 25px rgba(6, 182, 212, 0.22);
+
+    transform:
+        translateX(4px);
+}
+
+.citizen-nav-item.active::before {
+    content: "";
+
+    position: absolute;
+
+    left: -18px;
+
+    top: 9px;
+    bottom: 9px;
+
+    width: 4px;
+
+    border-radius: 0 5px 5px 0;
+
+    background: #67e8f9;
+}
+
+.nav-icon {
+    width: 27px;
+
+    display: flex;
+    justify-content: center;
+
+    font-size: 18px;
+}
+
+
+/* =====================================================
+   SIDEBAR BOTTOM
+===================================================== */
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+
+/* HELP CARD */
+
+.sidebar-help-card {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px;
+
+    margin-bottom: 12px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(6, 182, 212, 0.10),
+            rgba(14, 165, 233, 0.04)
+        );
+
+    border:
+        1px solid rgba(56, 189, 248, 0.13);
+}
+
+.help-icon {
+    font-size: 20px;
+}
+
+.sidebar-help-card strong {
+    display: block;
+
+    font-size: 12px;
+
+    color: #d9f8ff;
+}
+
+.sidebar-help-card small {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 10px;
+
+    color: #7290a6;
+}
+
+
+/* LOGOUT */
+
+.citizen-logout {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 13px 14px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background:
+        rgba(239, 68, 68, 0.08);
+
+    color: #fb7185;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.citizen-logout:hover {
+    background:
+        rgba(239, 68, 68, 0.16);
+
+    transform:
+        translateX(3px);
+}
+
+
+/* =====================================================
+   MAIN AREA
+===================================================== */
+
+.citizen-main {
+    margin-left: 285px;
+
+    width: calc(100% - 285px);
+
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 80% 10%,
+            rgba(6, 182, 212, 0.08),
+            transparent 28%
+        );
+}
+
+
+/* =====================================================
+   TOP BAR
+===================================================== */
+
+.citizen-topbar {
+    height: 82px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 30px;
+
+    border-bottom:
+        1px solid rgba(56, 189, 248, 0.15);
+
+    background:
+        rgba(5, 21, 36, 0.78);
+
+    backdrop-filter: blur(15px);
+
+    position: sticky;
+    top: 0;
+
+    z-index: 50;
+}
+
+.topbar-label {
+    display: block;
+
+    color: #22d3ee;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+.citizen-topbar h2 {
+    margin: 2px 0 0;
+
+    font-size: 21px;
+
+    color: #f8fafc;
+}
+
+.topbar-status {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px 13px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(34, 197, 94, 0.08);
+
+    border:
+        1px solid rgba(34, 197, 94, 0.18);
+
+    color: #86efac;
+
+    font-size: 12px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 10px rgba(34, 197, 94, 0.7);
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.citizen-content {
+    min-height: calc(100vh - 82px);
+
+    padding: 28px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .citizen-sidebar {
+        width: 230px;
+    }
+
+    .citizen-main {
+        margin-left: 230px;
+
+        width: calc(100% - 230px);
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .citizen-sidebar {
+        width: 75px;
+
+        padding: 15px 10px;
+    }
+
+    .citizen-main {
+        margin-left: 75px;
+
+        width: calc(100% - 75px);
+    }
+
+    .citizen-brand h1,
+    .citizen-brand span,
+    .citizen-user-card,
+    .nav-title,
+    .citizen-nav-item span:not(.nav-icon),
+    .sidebar-help-card,
+    .citizen-logout {
+        display: none;
+    }
+
+    .citizen-brand {
+        justify-content: center;
+    }
+
+    .citizen-nav-item {
+        justify-content: center;
+    }
+
+    .citizen-nav-item.active::before {
+        left: -10px;
+    }
+
+    .citizen-topbar {
+        padding: 0 15px;
+    }
+
+    .citizen-content {
+        padding: 15px;
+    }
+
+}
+/* =========================================================
+   FINAL CITIZEN DASHBOARD ALIGNMENT FIX
+   DO NOT CHANGE SIDEBAR DESIGN
+   ========================================================= */
+
+/* Main area starts immediately after sidebar */
+.citizen-main {
+    margin-left: 285px !important;
+    width: calc(100% - 285px) !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+}
+
+/* If your layout uses citizen-main-content */
+.citizen-main-content {
+    margin-left: 285px !important;
+    width: calc(100% - 285px) !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+}
+
+/* Dashboard content */
+.citizen-content {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 28px !important;
+    box-sizing: border-box;
+}
+
+/* Remove any extra left offset from dashboard children */
+.citizen-content > * {
+    margin-left: 0 !important;
+}
+
+/* Dashboard page itself */
+.smart-pave-page {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+}
+
+/* Dashboard content wrapper */
+.smart-pave-content {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+}
+
+/* Header */
+.smart-header {
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+/* Welcome card */
+.smart-welcome-card {
+    width: 100% !important;
+    margin-left: 0 !important;
+}
+
+/* Statistics section */
+.smart-stat-card {
+    margin-left: 0 !important;
+}
+/* =========================================================
+   FINAL CITIZEN ALIGNMENT FIX
+   ========================================================= */
+
+/* Sidebar controls the main horizontal offset */
+.citizen-main {
+    margin-left: 285px !important;
+    width: calc(100% - 285px) !important;
+}
+
+/* Inner content must NOT create another sidebar offset */
+.citizen-main .citizen-main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+}
+
+/* Dashboard content spacing */
+.citizen-main .citizen-content {
+    width: 100%;
+    margin-left: 0 !important;
+    padding: 28px !important;
+    box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+
+    .citizen-main {
+        margin-left: 230px !important;
+        width: calc(100% - 230px) !important;
+    }
+
+    .citizen-main .citizen-main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .citizen-main {
+        margin-left: 75px !important;
+        width: calc(100% - 75px) !important;
+    }
+
+    .citizen-main .citizen-main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .citizen-main .citizen-content {
+        padding: 15px !important;
+    }
+
+}
+/* =========================================================
+   CITIZEN LAYOUT - ALIGNMENT FIX
+   ========================================================= */
+
+.citizen-layout {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.citizen-sidebar {
+    width: 370px;
+    min-width: 370px;
+    min-height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+}
+
+
+/* =========================================================
+   MAIN AREA
+   ========================================================= */
+
+.citizen-main {
+    margin-left: 370px;
+    width: calc(100% - 370px);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.citizen-topbar {
+    width: 100%;
+    min-height: 115px;
+    padding: 24px 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.citizen-content {
+    width: 100%;
+    padding: 36px 40px 60px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   DASHBOARD PAGE
+   ========================================================= */
+
+.citizen-dashboard-page {
+    width: 100%;
+    min-height: calc(100vh - 115px);
+
+    padding: 0;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   WELCOME CARD
+   ========================================================= */
+
+.smart-welcome-card {
+    width: 100%;
+    max-width: 100%;
+
+    margin: 0 0 32px 0;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   STATISTICS GRID
+   ========================================================= */
+
+.citizen-stat-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   SECTION SPACING
+   ========================================================= */
+
+.citizen-section {
+    width: 100%;
+    margin-top: 32px;
+}
+
+
+/* =========================================================
+   MAP
+   ========================================================= */
+
+.smart-map-title {
+    margin-bottom: 16px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1400px) {
+
+    .citizen-sidebar {
+        width: 320px;
+        min-width: 320px;
+    }
+
+    .citizen-main {
+        margin-left: 320px;
+        width: calc(100% - 320px);
+    }
+
+    .citizen-stat-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 1000px) {
+
+    .citizen-sidebar {
+        width: 280px;
+        min-width: 280px;
+    }
+
+    .citizen-main {
+        margin-left: 280px;
+        width: calc(100% - 280px);
+    }
+
+    .citizen-content {
+        padding: 28px 24px 50px;
+    }
+
+    .citizen-stat-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .citizen-sidebar {
+        position: relative;
+        width: 100%;
+        min-width: 100%;
+        min-height: auto;
+    }
+
+    .citizen-main {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .citizen-layout {
+        display: block;
+    }
+
+    .citizen-stat-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .citizen-content {
+        padding: 20px;
+    }
+
+}
+/* =========================================================
+   OFFICIAL PORTAL
+   Uses the same visual system as Citizen Portal
+========================================================= */
+
+.official-layout {
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   OFFICIAL SIDEBAR
+========================================================= */
+
+.official-sidebar {
+    position: relative;
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   OFFICIAL MAIN
+========================================================= */
+
+.official-main {
+    min-width: 0;
+}
+
+
+/* =========================================================
+   OFFICIAL CONTENT
+========================================================= */
+
+.official-content {
+    min-width: 0;
+}
+
+
+/* =========================================================
+   OFFICIAL SIDEBAR NAVIGATION
+========================================================= */
+
+.official-sidebar .citizen-nav-item {
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   ACTIVE OFFICIAL MENU
+========================================================= */
+
+.official-sidebar .citizen-nav-item.active {
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   OFFICIAL LOGOUT
+========================================================= */
+
+.official-sidebar .citizen-logout {
+    cursor: pointer;
+}
