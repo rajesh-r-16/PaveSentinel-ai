@@ -1,6 +1,10 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException
+from fastapi import APIRouter, UploadFile, File, HTTPException, Request
 from PIL import Image
 import io
+import os
+import uuid
+
+from ai.services.detect_pothole import detect_pothole
 
 
 router = APIRouter(
@@ -10,28 +14,63 @@ router = APIRouter(
 
 
 @router.post("/detect")
-async def detect_pothole(
+async def detect_pothole_ai(
+    request: Request,
     image: UploadFile = File(...)
 ):
 
     try:
 
-        # ==============================
-        # READ UPLOADED IMAGE
-        # ==============================
+        # ==========================================
+        # 1. VALIDATE FILE TYPE
+        # ==========================================
+
+        allowed_types = [
+            "image/jpeg",
+            "image/png",
+            "image/jpg",
+            "image/webp"
+        ]
+
+        if image.content_type not in allowed_types:
+
+            raise HTTPException(
+                status_code=400,
+                detail="Only JPG, JPEG, PNG and WEBP images are allowed."
+            )
+
+
+        # ==========================================
+        # 2. READ IMAGE
+        # ==========================================
 
         contents = await image.read()
 
         if not contents:
+
             raise HTTPException(
                 status_code=400,
                 detail="Uploaded image is empty."
             )
 
 
-        # ==============================
-        # VALIDATE IMAGE
-        # ==============================
+        # ==========================================
+        # 3. CHECK FILE SIZE
+        # ==========================================
+
+        MAX_FILE_SIZE = 10 * 1024 * 1024
+
+        if len(contents) > MAX_FILE_SIZE:
+
+            raise HTTPException(
+                status_code=400,
+                detail="Image size must be less than 10 MB."
+            )
+
+
+        # ==========================================
+        # 4. VALIDATE IMAGE USING PIL
+        # ==========================================
 
         try:
 
@@ -39,13 +78,13 @@ async def detect_pothole(
                 io.BytesIO(contents)
             )
 
-            # Verify that PIL can actually read it
             img.verify()
 
-            # Re-open after verify
             img = Image.open(
                 io.BytesIO(contents)
             )
+
+            width, height = img.size
 
         except Exception:
 
@@ -55,29 +94,100 @@ async def detect_pothole(
             )
 
 
-        # ==============================
-        # IMAGE INFORMATION
-        # ==============================
+        # ==========================================
+        # 5. CREATE TEMPORARY AI INPUT FOLDER
+        # ==========================================
 
-        width, height = img.size
+        input_folder = "ai/inputs"
 
-
-        # ==============================
-        # DEMO AI RESULT
-        # ==============================
-
-        # This is currently a DEMO prediction.
-        # Replace this section later with
-        # your trained ML/AI model.
-
-        detected = True
-        severity = "High"
-        confidence = 92
+        os.makedirs(
+            input_folder,
+            exist_ok=True
+        )
 
 
-        # ==============================
-        # RECOMMENDATION
-        # ==============================
+        # ==========================================
+        # 6. CREATE UNIQUE FILE NAME
+        # ==========================================
+
+        original_name = image.filename or "image.jpg"
+
+        extension = os.path.splitext(
+            original_name
+        )[1].lower()
+
+        if extension not in [
+            ".jpg",
+            ".jpeg",
+            ".png",
+            ".webp"
+        ]:
+
+            extension = ".jpg"
+
+
+        unique_filename = (
+            f"ai_{uuid.uuid4().hex}"
+            f"{extension}"
+        )
+
+
+        input_path = os.path.join(
+            input_folder,
+            unique_filename
+        )
+
+
+        # ==========================================
+        # 7. SAVE IMAGE
+        # ==========================================
+
+        with open(
+            input_path,
+            "wb"
+        ) as file:
+
+            file.write(contents)
+
+
+        # ==========================================
+        # 8. RUN REAL YOLO MODEL
+        # ==========================================
+
+        print(
+            "AI Detection started:",
+            unique_filename
+        )
+
+        ai_result = detect_pothole(
+            input_path
+        )
+
+
+        print(
+            "AI Detection completed:",
+            ai_result
+        )
+
+
+        # ==========================================
+        # 9. GET AI RESULTS
+        # ==========================================
+
+        detected = ai_result["detected"]
+
+        count = ai_result["count"]
+
+        confidence = ai_result["confidence"]
+
+        severity = ai_result["severity"]
+
+        output_image = ai_result["output_image"]
+
+
+        # ==========================================
+        # 10. GENERATE RECOMMENDATION
+        # ==========================================
 
         if severity == "High":
 
@@ -93,17 +203,38 @@ async def detect_pothole(
                 "as soon as possible."
             )
 
+        elif severity == "Low":
+
+            recommendation = (
+                "Routine road maintenance is recommended."
+            )
+
         else:
 
             recommendation = (
-                "Road condition appears acceptable, "
-                "but periodic monitoring is recommended."
+                "No pothole detected. "
+                "Periodic monitoring is recommended."
             )
 
 
-        # ==============================
-        # RESPONSE
-        # ==============================
+        # ==========================================
+        # 11. CREATE OUTPUT IMAGE URL
+        # ==========================================
+
+        output_filename = os.path.basename(
+            output_image
+        )
+
+        output_url = (
+            str(request.base_url).rstrip("/")
+            + "/ai/outputs/"
+            + output_filename
+        )
+
+
+        # ==========================================
+        # 12. RETURN RESPONSE
+        # ==========================================
 
         return {
 
@@ -117,9 +248,16 @@ async def detect_pothole(
                 else "No Pothole Detected"
             ),
 
+            "count": count,
+
             "severity": severity,
 
-            "confidence": confidence,
+            "confidence": round(
+                confidence * 100,
+                2
+            ),
+
+            "confidence_score": confidence,
 
             "recommendation": recommendation,
 
@@ -133,7 +271,9 @@ async def detect_pothole(
 
             "image_height": height,
 
-            "filename": image.filename
+            "filename": image.filename,
+
+            "output_image": output_url
 
         }
 
