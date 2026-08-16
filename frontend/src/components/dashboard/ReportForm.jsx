@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { createReport } from "../../services/reportService";
+import api from "../../services/api";
 import AIResultCard from "../ai/AIResultCard";
 import { useForm } from "react-hook-form";
 
@@ -16,6 +17,7 @@ const ReportForm = ({ onReportSubmitted }) => {
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [aiResult, setAiResult] = useState(null);
+  const [reportId, setReportId] = useState(null);
   const [preview, setPreview] = useState(null);
 
   /* =====================================================
@@ -116,6 +118,114 @@ const ReportForm = ({ onReportSubmitted }) => {
       }
     );
   };
+  const waitForAIResult = async (reportId) => {
+
+    const maxAttempts = 30;
+
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+
+      try {
+
+        console.log(
+          `Checking AI result... Attempt ${attempt + 1}`
+        );
+
+        const response = await api.get(
+          `/report/${reportId}`
+        );
+
+        const report = response.data;
+
+        console.log(
+          "Report status:",
+          report.status
+        );
+
+        console.log(
+          "AI output image:",
+          report.ai_output_image
+        );
+
+        /*
+        * AI processing is complete when
+        * ai_output_image is available.
+        */
+
+        if (report.ai_output_image) {
+
+          const aiResult = {
+
+            detected:
+              String(report.ai_detected).toLowerCase() === "true",
+
+            count:
+              report.ai_detection_count ?? 0,
+
+            confidence:
+              report.ai_confidence ?? 0,
+
+            severity:
+              report.severity ?? "None",
+
+            summary:
+              report.ai_summary ?? "No AI summary available.",
+
+            output_image:
+              report.ai_output_image,
+
+            priority: {
+
+              level:
+                report.priority_level ?? "N/A",
+
+              score:
+                report.priority_score ?? 0,
+
+              estimated_repair_time:
+                report.estimated_repair_time ?? "N/A",
+
+              recommendation:
+                report.repair_recommendation ?? "N/A"
+            }
+
+          };
+
+          console.log(
+            "AI RESULT READY:",
+            aiResult
+          );
+
+          setAiResult(aiResult);
+
+          toast.success(
+            "AI analysis completed"
+          );
+
+          return;
+        }
+
+      } catch (error) {
+
+        console.error(
+          "AI result check error:",
+          error
+        );
+
+      }
+
+      /*
+      * Wait 2 seconds before checking again.
+      */
+
+      await new Promise(
+        resolve => setTimeout(resolve, 2000)
+      );
+    }
+
+    toast.error(
+      "AI analysis is taking longer than expected."
+    );
+  };
 
   /* =====================================================
      SUBMIT REPORT
@@ -213,30 +323,81 @@ const ReportForm = ({ onReportSubmitted }) => {
 
       /* API REQUEST */
 
-      const response =
-        await createReport(formData);
+      const response = await createReport(formData);
 
       console.log(
         "Report Response:",
         response
       );
 
-      /* AI RESULT */
+      const result = response.data || response;
 
-      setAiResult(
-        response.data?.ai ||
-        response.ai
+      console.log(
+        "Report ID:",
+        result.report_id
       );
 
-      /* REFRESH REPORTS */
+      console.log(
+        "AI Status:",
+        result.ai_status
+      );
+
+      setReportId(result.report_id);
+
+      setAiResult(
+        result.ai || {
+          ai_status: result.ai_status
+        }
+      );
+
+
+      /* ==========================================
+        REPORT CREATED
+      ========================================== */
+
+      const reportData =
+        response.data || response;
+
+      console.log(
+        "Created Report:",
+        reportData
+      );
+
+      const reportId =
+        reportData.report_id;
+
+      if (!reportId) {
+
+        throw new Error(
+          "Report ID was not returned by backend."
+        );
+
+      }
+
+
+      /* ==========================================
+        FAST SUCCESS MESSAGE
+      ========================================== */
+
+      toast.success(
+        "Report Submitted Successfully"
+      );
+
+
+      /* ==========================================
+        REFRESH REPORT LIST
+      ========================================== */
 
       if (onReportSubmitted) {
         onReportSubmitted();
       }
 
-      toast.success(
-        "Report Submitted Successfully"
-      );
+
+      /* ==========================================
+        WAIT FOR AI PROCESSING
+      ========================================== */
+
+      waitForAIResult(reportId);
 
     } catch (error) {
 
@@ -545,6 +706,7 @@ const ReportForm = ({ onReportSubmitted }) => {
       {aiResult && (
         <AIResultCard
           ai={aiResult}
+          reportId={reportId}
         />
       )}
 

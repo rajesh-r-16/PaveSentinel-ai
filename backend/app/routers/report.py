@@ -3,9 +3,11 @@ from fastapi import Depends
 from fastapi import UploadFile
 from fastapi import File
 from fastapi import Query
+from fastapi import BackgroundTasks
 
 from sqlalchemy.orm import Session
 from datetime import datetime
+
 from app.core.database import get_db
 
 from app.models.report import Report
@@ -13,10 +15,13 @@ from app.models.notification import Notification
 from app.schemas.report import ReportCreate
 from app.core.security import get_current_user
 from app.models.user import User
+
 from ai.services.detect_pothole import detect_pothole
 from ai.services.ai_report import generate_ai_report
 from ai.services.priority import calculate_priority
+
 import os
+
 
 router = APIRouter(
     prefix="/report",
@@ -24,10 +29,159 @@ router = APIRouter(
 )
 
 
+# ============================================================
+# BACKGROUND AI PROCESSING
+# ============================================================
+
+def process_report_ai(report_id, filepath):
+
+    from app.core.database import SessionLocal
+
+    db = SessionLocal()
+
+    try:
+
+        print(
+            f"AI PROCESSING STARTED FOR REPORT #{report_id}"
+        )
+
+        # ----------------------------------------------------
+        # YOLO DETECTION
+        # ----------------------------------------------------
+
+        ai_result = detect_pothole(filepath)
+
+        # ----------------------------------------------------
+        # AI REPORT
+        # ----------------------------------------------------
+
+        ai_summary = generate_ai_report(
+            ai_result
+        )
+
+        # ----------------------------------------------------
+        # PRIORITY
+        # ----------------------------------------------------
+
+        priority = calculate_priority(
+            ai_result
+        )
+
+        # ----------------------------------------------------
+        # FIND REPORT
+        # ----------------------------------------------------
+
+        report = db.query(Report).filter(
+            Report.id == report_id
+        ).first()
+
+        if report is None:
+
+            print(
+                f"Report #{report_id} not found"
+            )
+
+            return
+
+        # ----------------------------------------------------
+        # UPDATE AI RESULTS
+        # ----------------------------------------------------
+
+        report.severity = ai_result["severity"]
+
+        report.ai_detected = str(
+            ai_result["detected"]
+        )
+
+        report.ai_confidence = (
+            ai_result["confidence"]
+        )
+
+        report.ai_detection_count = (
+            ai_result["count"]
+        )
+
+        report.ai_output_image = (
+            ai_result["output_image"]
+        )
+
+        report.ai_model = "YOLOv8"
+
+        report.ai_summary = ai_summary
+
+        report.priority_score = (
+            priority["score"]
+        )
+
+        report.priority_level = (
+            priority["level"]
+        )
+
+        report.repair_recommendation = (
+            priority["recommendation"]
+        )
+
+        report.estimated_repair_time = (
+            priority["repair_time"]
+        )
+
+        # Keep report Pending until official verification
+        report.status = "Pending"
+
+        db.commit()
+
+        # ----------------------------------------------------
+        # AI COMPLETION NOTIFICATION
+        # ----------------------------------------------------
+
+        notification = Notification(
+
+            user_id=report.user_id,
+
+            title="AI Analysis Completed",
+
+            message=(
+                f"AI analysis for report "
+                f"#{report.id} has been completed."
+            ),
+
+            notification_type="success",
+
+            is_read=False
+        )
+
+        db.add(notification)
+
+        db.commit()
+
+        print(
+            f"AI PROCESSING COMPLETED FOR REPORT #{report_id}"
+        )
+
+    except Exception as error:
+
+        print(
+            f"AI PROCESSING ERROR FOR REPORT #{report_id}: "
+            f"{str(error)}"
+        )
+
+    finally:
+
+        db.close()
+
+
+# ============================================================
+# CREATE REPORT
+# ============================================================
+
 @router.post("/create")
 async def create_report(
-    
-    report: ReportCreate = Depends(ReportCreate.as_form),
+
+    background_tasks: BackgroundTasks,
+
+    report: ReportCreate = Depends(
+        ReportCreate.as_form
+    ),
 
     image: UploadFile = File(...),
 
@@ -35,8 +189,12 @@ async def create_report(
 
     current_user=Depends(get_current_user)
 
-
 ):
+
+    # ========================================================
+    # FIND USER
+    # ========================================================
+
     email = current_user.get("sub")
 
     db_user = db.query(User).filter(
@@ -44,23 +202,33 @@ async def create_report(
     ).first()
 
     if db_user is None:
+
         raise HTTPException(
             status_code=404,
             detail="User not found"
         )
+
+    # ========================================================
+    # IMAGE VALIDATION
+    # ========================================================
+
     allowed_types = [
-    "image/jpeg",
-    "image/png",
-    "image/jpg",
-    "image/webp"
+        "image/jpeg",
+        "image/png",
+        "image/jpg",
+        "image/webp"
     ]
 
     if image.content_type not in allowed_types:
 
         raise HTTPException(
             status_code=400,
-            detail="Only JPG, JPEG, PNG and WEBP images are allowed"
+            detail=(
+                "Only JPG, JPEG, PNG and WEBP "
+                "images are allowed"
+            )
         )
+
     MAX_FILE_SIZE = 10 * 1024 * 1024
 
     file_content = await image.read()
@@ -71,8 +239,15 @@ async def create_report(
             status_code=400,
             detail="Image size must be less than 10 MB"
         )
-    
-    os.makedirs("uploads", exist_ok=True)
+
+    # ========================================================
+    # SAVE IMAGE
+    # ========================================================
+
+    os.makedirs(
+        "uploads",
+        exist_ok=True
+    )
 
     filename = image.filename
 
@@ -87,19 +262,23 @@ async def create_report(
         unique_filename
     )
 
-
     with open(filepath, "wb") as file:
 
         file.write(file_content)
 
-    ai_result = detect_pothole(filepath)
-
-    ai_summary = generate_ai_report(ai_result)
-
-    priority = calculate_priority(ai_result)
-    
+    # ========================================================
+    # CREATE REPORT IMMEDIATELY
+    # ========================================================
+    #
+    # IMPORTANT:
+    # YOLO IS NOT RUN HERE.
+    #
+    # This allows the API to respond quickly.
+    #
+    # ========================================================
 
     new_report = Report(
+
         user_id=db_user.id,
 
         image=filepath,
@@ -112,38 +291,61 @@ async def create_report(
 
         description=report.description,
 
-        severity=ai_result["severity"],
+        severity="Processing",
 
         status="Pending",
 
-        ai_detected=str(ai_result["detected"]),
+        ai_detected="Processing",
 
-        ai_confidence=ai_result["confidence"],
+        ai_confidence=0,
 
-        ai_detection_count=ai_result["count"],
+        ai_detection_count=0,
 
-        ai_output_image=ai_result["output_image"],
+        ai_output_image=None,
 
         ai_model="YOLOv8",
 
-        ai_summary=ai_summary,
+        ai_summary="AI analysis is processing.",
 
-        priority_score=priority["score"],
+        priority_score=0,
 
-        priority_level=priority["level"],
+        priority_level="Processing",
 
-        repair_recommendation=priority["recommendation"],
+        repair_recommendation=(
+            "AI analysis is processing."
+        ),
 
-        estimated_repair_time=priority["repair_time"]
-        
+        estimated_repair_time="Processing"
 
     )
+
+    # ========================================================
+    # SAVE REPORT
+    # ========================================================
 
     db.add(new_report)
 
     db.commit()
 
     db.refresh(new_report)
+
+    # ========================================================
+    # START BACKGROUND AI
+    # ========================================================
+
+    background_tasks.add_task(
+
+        process_report_ai,
+
+        new_report.id,
+
+        filepath
+
+    )
+
+    # ========================================================
+    # SUBMISSION NOTIFICATION
+    # ========================================================
 
     notification = Notification(
 
@@ -159,54 +361,55 @@ async def create_report(
         notification_type="success",
 
         is_read=False
+
     )
 
     db.add(notification)
 
     db.commit()
 
+    # ========================================================
+    # IMMEDIATE RESPONSE
+    # ========================================================
+
     return {
 
-    "message": "Report Submitted Successfully",
+        "message": (
+            "Report Submitted Successfully"
+        ),
 
-    "report_id": new_report.id,
+        "report_id": new_report.id,
 
-    "ai": {
+        "ai_status": "Processing",
 
-        "detected": ai_result["detected"],
-
-        "count": ai_result["count"],
-
-        "confidence": ai_result["confidence"],
-
-        "severity": ai_result["severity"],
-
-        "summary": ai_summary,
-
-        "priority": {
-
-            "score": priority["score"],
-
-            "level": priority["level"],
-
-            "recommendation": priority["recommendation"],
-
-            "estimated_repair_time": priority["repair_time"]
-
-        },
-
-        "output_image": ai_result["output_image"]
+        "message_detail": (
+            "Your report has been submitted. "
+            "AI analysis is running in the background."
+        )
 
     }
 
-}
+
+# ============================================================
+# MAP REPORTS
+# ============================================================
+
 @router.get("/map")
 def get_map_reports(
-    current_user=Depends(get_current_user),
-    db: Session = Depends(get_db)
+
+    current_user=Depends(
+        get_current_user
+    ),
+
+    db: Session = Depends(
+        get_db
+    )
+
 ):
 
-    reports = db.query(Report).all()
+    reports = db.query(
+        Report
+    ).all()
 
     response = []
 
@@ -224,8 +427,6 @@ def get_map_reports(
 
             "description": report.description,
 
-            
-
             "severity": report.severity,
 
             "status": report.status
@@ -233,61 +434,96 @@ def get_map_reports(
         })
 
     return response
+
+
+# ============================================================
+# MY REPORTS
+# ============================================================
+
 @router.get("/my-reports")
 def get_my_reports(
-    current_user=Depends(get_current_user),
-    db: Session = Depends(get_db)
+
+    current_user=Depends(
+        get_current_user
+    ),
+
+    db: Session = Depends(
+        get_db
+    )
+
 ):
 
-    # Make sure only Citizens can access this endpoint
     if current_user.get("role") != "Citizen":
+
         raise HTTPException(
             status_code=403,
             detail="Citizen access required"
         )
 
-    # Get email from JWT
     email = current_user.get("sub")
 
     if not email:
+
         raise HTTPException(
             status_code=401,
             detail="User email not found in token"
         )
 
-    # Find the logged-in user
     db_user = db.query(User).filter(
         User.email == email
     ).first()
 
     if db_user is None:
+
         raise HTTPException(
             status_code=404,
             detail="Citizen not found"
         )
 
-    # Get reports belonging to this citizen
-    reports = db.query(Report).filter(
+    reports = db.query(
+        Report
+    ).filter(
         Report.user_id == db_user.id
     ).order_by(
         Report.id.desc()
     ).all()
 
     return [
+
         {
+
             "id": report.id,
+
             "latitude": report.latitude,
+
             "longitude": report.longitude,
+
             "address": report.address,
+
             "description": report.description,
+
             "severity": report.severity,
+
             "status": report.status,
+
             "image": report.image,
+
             "repair_image": report.repair_image,
-            "repair_image_uploaded_at": report.repair_image_uploaded_at
+
+            "repair_image_uploaded_at":
+                report.repair_image_uploaded_at
+
         }
+
         for report in reports
+
     ]
+
+
+# ============================================================
+# SEARCH REPORTS
+# ============================================================
+
 @router.get("/search")
 def search_reports(
 
@@ -299,82 +535,108 @@ def search_reports(
 
     priority: str | None = Query(None),
 
-    current_user=Depends(get_current_user),
+    current_user=Depends(
+        get_current_user
+    ),
 
-    db: Session =Depends(get_db)
+    db: Session = Depends(
+        get_db
+    )
 
 ):
+
     db_user = db.query(User).filter(
         User.email == current_user["sub"]
     ).first()
 
-    query = db.query(Report).filter(
+    query = db.query(
+        Report
+    ).filter(
         Report.user_id == db_user.id
     )
 
     if address:
 
         query = query.filter(
+            Report.address.ilike(
+                f"%{address}%"
+            )
+        )
 
-            Report.address.ilike(f"%{address}%")
-
-    )
     if status:
 
         query = query.filter(
-
             Report.status == status
+        )
 
-    )
     if severity:
 
         query = query.filter(
-
             Report.severity == severity
+        )
 
-    )
     if priority:
 
         query = query.filter(
-
             Report.priority_level == priority
+        )
 
-    )
     return query.order_by(
         Report.id.desc()
     ).all()
 
+
+# ============================================================
+# REPORT DETAILS
+# ============================================================
+
 @router.get("/{report_id}")
 def get_report_details(
+
     report_id: int,
-    current_user=Depends(get_current_user),
-    db: Session = Depends(get_db)
+
+    current_user=Depends(
+        get_current_user
+    ),
+
+    db: Session = Depends(
+        get_db
+    )
+
 ):
 
-    # Find logged-in user
     db_user = db.query(User).filter(
         User.email == current_user["sub"]
     ).first()
 
     if db_user is None:
+
         raise HTTPException(
             status_code=404,
             detail="User not found"
         )
 
-    # Find report
-    report = db.query(Report).filter(
+    report = db.query(
+        Report
+    ).filter(
         Report.id == report_id,
         Report.user_id == db_user.id
     ).first()
 
     if report is None:
+
         raise HTTPException(
             status_code=404,
             detail="Report not found"
         )
 
     return report
+
+
+# ============================================================
+# UPDATE REPORT
+# ============================================================
+
 @router.put("/{report_id}")
 def update_report(
 
@@ -382,94 +644,126 @@ def update_report(
 
     report: ReportCreate,
 
-    current_user=Depends(get_current_user),
+    current_user=Depends(
+        get_current_user
+    ),
 
-    db: Session = Depends(get_db)
+    db: Session = Depends(
+        get_db
+    )
 
 ):
 
-    # Find logged in user
     db_user = db.query(User).filter(
         User.email == current_user["sub"]
     ).first()
 
     if db_user is None:
+
         raise HTTPException(
             status_code=404,
             detail="User not found"
         )
 
-    # Find report
-    db_report = db.query(Report).filter(
+    db_report = db.query(
+        Report
+    ).filter(
         Report.id == report_id,
         Report.user_id == db_user.id
     ).first()
 
     if db_report is None:
+
         raise HTTPException(
             status_code=404,
             detail="Report not found"
         )
 
-    # Allow update only if status is Pending
     if db_report.status != "Pending":
+
         raise HTTPException(
             status_code=400,
             detail="Only Pending reports can be updated"
         )
 
     db_report.latitude = report.latitude
+
     db_report.longitude = report.longitude
+
     db_report.address = report.address
+
     db_report.description = report.description
 
     db.commit()
+
     db.refresh(db_report)
 
     return {
+
         "message": "Report updated successfully",
+
         "report": db_report
+
     }
+
+
+# ============================================================
+# DELETE REPORT
+# ============================================================
+
 @router.delete("/{report_id}")
 def delete_report(
+
     report_id: int,
-    current_user=Depends(get_current_user),
-    db: Session = Depends(get_db)
+
+    current_user=Depends(
+        get_current_user
+    ),
+
+    db: Session = Depends(
+        get_db
+    )
+
 ):
 
-    # Find logged-in user
     db_user = db.query(User).filter(
         User.email == current_user["sub"]
     ).first()
 
     if db_user is None:
+
         raise HTTPException(
             status_code=404,
             detail="User not found"
         )
 
-    # Find report
-    report = db.query(Report).filter(
+    report = db.query(
+        Report
+    ).filter(
         Report.id == report_id,
         Report.user_id == db_user.id
     ).first()
 
     if report is None:
+
         raise HTTPException(
             status_code=404,
             detail="Report not found"
         )
 
-    # Allow delete only if Pending
     if report.status != "Pending":
+
         raise HTTPException(
             status_code=400,
             detail="Only Pending reports can be deleted"
         )
 
     db.delete(report)
+
     db.commit()
 
     return {
+
         "message": "Report deleted successfully"
+
     }

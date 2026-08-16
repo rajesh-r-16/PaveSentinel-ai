@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
     baseURL: "https://pavesentinel-api-5cbs.onrender.com",
-    timeout: 120000,
+    timeout: 30000,
 });
 
 

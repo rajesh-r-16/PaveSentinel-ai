@@ -1,6 +1,6 @@
 import os
 import cv2
-
+import time
 from ai.services.yolo_loader import model
 
 
@@ -17,7 +17,21 @@ def calculate_severity(area):
 
 def detect_pothole(image_path):
 
-    results = model(image_path)
+    start_time = time.perf_counter()
+
+    results = model(
+        image_path,
+        imgsz=320,
+        verbose=False
+    )
+
+    end_time = time.perf_counter()
+
+    inference_time = end_time - start_time
+
+    print(
+        f"YOLO INFERENCE TIME: {inference_time:.2f} seconds"
+    )
 
     output_folder = "ai/outputs"
 
@@ -28,6 +42,7 @@ def detect_pothole(image_path):
     output_path = os.path.join(
         output_folder,
         filename
+
     )
 
     annotated = results[0].plot()
